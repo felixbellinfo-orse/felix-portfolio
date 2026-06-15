@@ -1,8 +1,9 @@
-// Theme toggle — no localStorage (sandboxed)
+// Theme toggle — persists across pages via localStorage
 (function () {
   var root = document.documentElement;
+  var stored = localStorage.getItem('theme');
   var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var currentTheme = prefersDark ? 'dark' : 'light';
+  var currentTheme = stored || (prefersDark ? 'dark' : 'light');
   root.setAttribute('data-theme', currentTheme);
 
   function updateIcon(t) {
@@ -24,6 +25,7 @@
       btn.addEventListener('click', function () {
         currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
         updateIcon(currentTheme);
       });
     }
