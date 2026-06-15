@@ -234,7 +234,7 @@ button {
 }
 
 .ticker-row--want .ticker-label {
-  background: var(--color-text-muted);
+  background:  #1a14cb;
 }
 
 [data-theme='dark'] .ticker-row--working .ticker-label {
