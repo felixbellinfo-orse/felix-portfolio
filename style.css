@@ -186,9 +186,13 @@ button {
 
 /* ---- Ticker ---- */
 .ticker-bar {
+  position: sticky;
+  top: var(--header-height, 57px);
+  z-index: 99;
   width: 100%;
   overflow: hidden;
   border-bottom: 1px solid var(--color-divider);
+  background: var(--color-bg);
   opacity: 0;
   transition: opacity 400ms ease;
 }
