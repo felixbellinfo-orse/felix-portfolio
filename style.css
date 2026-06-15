@@ -255,25 +255,25 @@ button {
   display: flex;
   align-items: center;
   height: 100%;
-  position: relative;
+  padding: 0 var(--space-4);
 }
 
-.ticker-track {
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
+.ticker-scroll::after {
+  content: '|';
   font-size: var(--text-sm);
-  font-family: var(--font-body);
-  font-weight: 300;
-  color: var(--color-text);
-  will-change: transform;
-  position: absolute;
-  left: 0;
+  color: var(--color-text-muted);
+  margin-left: 1px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ticker-track {
-    animation: none !important;
+  .ticker-scroll::after {
+    animation: none;
   }
 }
 
