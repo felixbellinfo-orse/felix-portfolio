@@ -7,6 +7,7 @@
 // whatever names make sense to you.
 const ARENA_CHANNELS = [
   { slug: 'soundsystem-yu-vopqlbgg', label: 'soundsystem', categories: ['sound'] },
+  { slug: 'sound-rewire', label: 'soundsystem', categories: ['installation'] },
   // Add more channels below as you create them on Are.na:
   // { slug: 'your-channel-slug', label: 'channel name', categories: ['design', 'sound'] },
 ];
