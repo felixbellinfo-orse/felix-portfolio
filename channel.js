@@ -233,10 +233,7 @@ async function initChannel() {
     const title = info.title || currentSlug;
     document.title = `${title} — Felix Bell`;
     if (titleEl) titleEl.textContent = title;
-    if (metaEl) {
-      const count = info.length || 0;
-      metaEl.textContent = `${count} block${count !== 1 ? 's' : ''}`;
-    }
+    if (metaEl) metaEl.textContent = '';
 
     totalBlocks = info.length || 0;
 
