@@ -255,25 +255,25 @@ button {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 var(--space-4);
+  position: relative;
 }
 
-.ticker-scroll::after {
-  content: '|';
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  margin-left: 1px;
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-text);
+  will-change: transform;
+  position: absolute;
+  left: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ticker-scroll::after {
-    animation: none;
+  .ticker-track {
+    animation: none !important;
   }
 }
 
