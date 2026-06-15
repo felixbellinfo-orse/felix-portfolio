@@ -66,7 +66,7 @@
 }
 
 [data-theme='dark'] {
-  --color-bg: #19170f;
+  --color-bg: #221f13;
   --color-surface: #1e1c14;
   --color-surface-2: #23211a;
   --color-surface-offset: #1c1a12;
@@ -205,7 +205,7 @@ button {
   display: flex;
   align-items: center;
   overflow: hidden;
-  height: 2.4rem;
+  height: 2rem;
   border-bottom: 1px solid var(--color-divider);
 }
 
@@ -215,7 +215,7 @@ button {
 
 .ticker-label {
   flex-shrink: 0;
-  padding: 0 var(--space-5);
+  padding: 0 var(--space-6);
   font-size: var(--text-xs);
   font-family: var(--font-body);
   font-weight: 500;
@@ -230,7 +230,7 @@ button {
 }
 
 .ticker-row--working .ticker-label {
-  background: var(--color-text);
+  background: #3ecb14;
 }
 
 .ticker-row--want .ticker-label {
@@ -265,7 +265,7 @@ button {
   font-weight: 300;
   color: var(--color-text);
   padding-right: 0;
-  animation: ticker-scroll 35s linear infinite;
+  animation: ticker-scroll 10s linear infinite;
   will-change: transform;
 }
 
