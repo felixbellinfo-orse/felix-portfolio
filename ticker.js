@@ -1,6 +1,6 @@
 // ============================================================
 // TICKER — fetches text blocks from two Are.na channels
-// and renders two scrolling marquee rows.
+// and renders two seamlessly scrolling rows.
 //
 // HOW TO USE:
 // 1. Create two channels on Are.na (set to closed, not private)
@@ -16,6 +16,7 @@ const TICKER_CHANNELS = {
 const ARENA_API = 'https://api.are.na/v2/channels/';
 const SEPARATOR = '\u00a0\u00a0\u00a0\u2736\u00a0\u00a0\u00a0'; // ✶ with spacing
 const PLACEHOLDER = 'would-like-to-work-on1';
+const SPEED = 60; // pixels per second — increase to scroll faster
 
 async function fetchTextBlocks(slug) {
   try {
@@ -32,14 +33,40 @@ async function fetchTextBlocks(slug) {
 
 function buildTickerTrack(items) {
   const text = items.join(SEPARATOR) + SEPARATOR;
-  // Duplicate for seamless loop
-  return `<span class="ticker-track" aria-hidden="true">${text}</span><span class="ticker-track">${text}</span>`;
+  return `<span class="ticker-track">${text}${text}</span>`;
+}
+
+function startScroll(scrollEl) {
+  const track = scrollEl.querySelector('.ticker-track');
+  if (!track) return;
+
+  // Wait one frame so the browser has rendered and we can measure
+  requestAnimationFrame(() => {
+    const fullWidth = track.scrollWidth / 2; // half because text is doubled
+    let x = 0;
+    let last = null;
+
+    function step(ts) {
+      if (last === null) last = ts;
+      const delta = (ts - last) / 1000; // seconds
+      last = ts;
+
+      x -= SPEED * delta;
+      if (x <= -fullWidth) x += fullWidth; // seamless reset — invisible to eye
+
+      track.style.transform = `translateX(${x}px)`;
+      requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  });
 }
 
 function showRow(rowEl, scrollEl, items) {
   if (items.length > 0) {
     scrollEl.innerHTML = buildTickerTrack(items);
     rowEl.style.display = 'flex';
+    startScroll(scrollEl);
     return true;
   } else {
     rowEl.style.display = 'none';
@@ -48,9 +75,9 @@ function showRow(rowEl, scrollEl, items) {
 }
 
 async function initTickers() {
-  const tickerBar    = document.getElementById('ticker-bar');
-  const workingRow   = document.querySelector('.ticker-row--working');
-  const wantRow      = document.querySelector('.ticker-row--want');
+  const tickerBar     = document.getElementById('ticker-bar');
+  const workingRow    = document.querySelector('.ticker-row--working');
+  const wantRow       = document.querySelector('.ticker-row--want');
   const workingScroll = document.getElementById('ticker-working');
   const wantScroll    = document.getElementById('ticker-want');
 
@@ -65,7 +92,7 @@ async function initTickers() {
   const hasWant    = showRow(wantRow, wantScroll, wantItems);
 
   if (hasWorking || hasWant) {
-    tickerBar.removeAttribute('style'); // clear the display:none
+    tickerBar.removeAttribute('style');
     tickerBar.style.opacity = '1';
   }
 }
