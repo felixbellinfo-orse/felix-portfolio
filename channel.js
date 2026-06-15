@@ -2,7 +2,7 @@
 // CHANNEL PAGE — fetches and renders a single Are.na channel
 // ============================================================
 
-const ARENA_API = 'https://api.are.na/v2/channels/';
+const CHANNEL_API = 'https://api.are.na/v2/channels/';
 const PER_PAGE = 24;
 
 let currentSlug = '';
@@ -171,13 +171,13 @@ function renderAppearsIn(info) {
 // ---- Fetch & render ----
 
 async function fetchBlocks(slug, page) {
-  const res = await fetch(`${ARENA_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=position&direction=asc`);
+  const res = await fetch(`${CHANNEL_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=position&direction=asc`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
 
 async function fetchChannelInfo(slug) {
-  const res = await fetch(`${ARENA_API}${slug}`);
+  const res = await fetch(`${CHANNEL_API}${slug}`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
