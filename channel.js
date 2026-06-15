@@ -147,6 +147,27 @@ function escapeAttr(str) {
   return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+// ---- Appears In ----
+
+function renderAppearsIn(info) {
+  const wrap = document.getElementById('channel-appears-in');
+  const linksEl = document.getElementById('appears-in-links');
+  if (!wrap || !linksEl) return;
+
+  // Are.na returns connected channels in info.connections (array of channel objects)
+  const connections = (info.connections || []).filter(c => c.class === 'Channel' || c.base_class === 'Channel');
+  if (connections.length === 0) return;
+
+  linksEl.innerHTML = connections.map(c => {
+    const slug = c.slug || '';
+    const title = c.title || slug;
+    const href = slug ? `channel.html?slug=${encodeURIComponent(slug)}` : '#';
+    return `<a href="${escapeAttr(href)}" class="appears-in-pill">${escapeHtml(title)}</a>`;
+  }).join('');
+
+  wrap.style.display = 'flex';
+}
+
 // ---- Fetch & render ----
 
 async function fetchBlocks(slug, page) {
@@ -236,6 +257,9 @@ async function initChannel() {
     if (metaEl) metaEl.textContent = '';
 
     totalBlocks = info.length || 0;
+
+    // Render "This channel appears in" connections
+    renderAppearsIn(info);
 
     // Clear skeleton and render blocks
     if (grid) grid.innerHTML = '';
