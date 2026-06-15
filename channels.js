@@ -2,13 +2,17 @@
 // CHANNELS INDEX — fetches Felix Bell's Are.na channels
 // ============================================================
 
-// Add channels here. Each entry can have one or more categories.
-// Categories become filter buttons automatically — just use
-// whatever names make sense to you.
+// Add channels here.
+// appearsIn = Are.na slugs of the parent channels this work belongs to.
+// These become the filter tabs — fetched live so titles update automatically.
 const ARENA_CHANNELS = [
-  { slug: 'soundsystem-yu-vopqlbgg', label: 'soundsystem', categories: ['sound'] },
+  {
+    slug: 'soundsystem-yu-vopqlbgg',
+    label: 'soundsystem',
+    appearsIn: ['sound-p-hgk4lwt-k', 'installation-3ychr9gvdzg'],
+  },
   // Add more channels below as you create them on Are.na:
-  // { slug: 'your-channel-slug', label: 'channel name', categories: ['design', 'sound'] },
+  // { slug: 'your-channel-slug', label: 'channel name', appearsIn: ['sound-xirpilcp9ru'] },
 ];
 
 const CHANNELS_API = 'https://api.are.na/v2/channels/';
@@ -33,6 +37,17 @@ async function fetchChannelPreview(slug) {
   return res.json();
 }
 
+async function fetchChannelTitle(slug) {
+  try {
+    const res = await fetch(`${CHANNELS_API}${slug}`);
+    if (!res.ok) return slug;
+    const data = await res.json();
+    return data.title || slug;
+  } catch {
+    return slug;
+  }
+}
+
 function getChannelThumb(channel) {
   if (!channel.contents) return null;
   for (const block of channel.contents) {
@@ -51,12 +66,12 @@ function formatDate(iso) {
 
 // ---- Card renderer ----
 
-function renderChannelCard(channel, slug, label, categories) {
+function renderChannelCard(channel, slug, label, appearsIn) {
   const thumb = getChannelThumb(channel);
   const url = `channel.html?slug=${encodeURIComponent(slug)}`;
   const created = formatDate(channel.created_at);
   const updated = formatDate(channel.updated_at);
-  const cats = (categories || []).join(' ');
+  const cats = (appearsIn || []).join(' ');
 
   const thumbHtml = thumb
     ? `<img src="${thumb}" alt="${label}" loading="lazy" />`
@@ -79,19 +94,17 @@ function renderChannelCard(channel, slug, label, categories) {
 
 // ---- Filter buttons ----
 
-function buildFilters(categories) {
+function buildFilters(tabs) {
+  // tabs = [{ slug, title }]
   const filtersEl = document.getElementById('channel-filters');
   if (!filtersEl) return;
 
-  // Always start with "All"
-  const all = ['all', ...categories];
-
-  filtersEl.innerHTML = all.map(cat => `
+  filtersEl.innerHTML = [{ slug: 'all', title: 'All' }, ...tabs].map(tab => `
     <button
-      class="filter-btn${cat === 'all' ? ' filter-btn--active' : ''}"
-      data-filter="${cat}"
-      aria-pressed="${cat === 'all' ? 'true' : 'false'}"
-    >${cat === 'all' ? 'All' : cat}</button>
+      class="filter-btn${tab.slug === 'all' ? ' filter-btn--active' : ''}"
+      data-filter="${tab.slug}"
+      aria-pressed="${tab.slug === 'all' ? 'true' : 'false'}"
+    >${tab.title}</button>
   `).join('');
 
   filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
@@ -100,16 +113,13 @@ function buildFilters(categories) {
 }
 
 function applyFilter(filter) {
-  // Update active button
   document.querySelectorAll('.filter-btn').forEach(btn => {
     const isActive = btn.dataset.filter === filter;
     btn.classList.toggle('filter-btn--active', isActive);
     btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
   });
 
-  // Show/hide cards
-  const cards = document.querySelectorAll('#channels-grid .channel-card');
-  cards.forEach(card => {
+  document.querySelectorAll('#channels-grid .channel-card').forEach(card => {
     const cats = card.dataset.categories ? card.dataset.categories.split(' ') : [];
     const visible = filter === 'all' || cats.includes(filter);
     card.classList.toggle('channel-card--hidden', !visible);
@@ -122,14 +132,17 @@ async function initChannels() {
   const grid = document.getElementById('channels-grid');
   if (!grid) return;
 
-  // Collect unique categories from the channel list
-  const allCats = [...new Set(
-    ARENA_CHANNELS.flatMap(ch => ch.categories || [])
-  )].sort();
+  // Collect unique parent channel slugs across all cards
+  const allSlugs = [...new Set(
+    ARENA_CHANNELS.flatMap(ch => ch.appearsIn || [])
+  )];
 
-  // Only show filters if there are categories defined
-  if (allCats.length > 0) {
-    buildFilters(allCats);
+  // Fetch titles for all parent channels in parallel
+  let tabs = [];
+  if (allSlugs.length > 0) {
+    const titles = await Promise.all(allSlugs.map(fetchChannelTitle));
+    tabs = allSlugs.map((slug, i) => ({ slug, title: titles[i] }));
+    buildFilters(tabs);
     document.getElementById('channel-filters').style.display = 'flex';
   }
 
@@ -142,11 +155,11 @@ async function initChannels() {
     );
 
     const cards = results.map((result, i) => {
-      const { slug, label, categories } = ARENA_CHANNELS[i];
+      const { slug, label, appearsIn } = ARENA_CHANNELS[i];
       if (result.status === 'fulfilled') {
-        return renderChannelCard(result.value, slug, label, categories);
+        return renderChannelCard(result.value, slug, label, appearsIn);
       } else {
-        const cats = (categories || []).join(' ');
+        const cats = (appearsIn || []).join(' ');
         return `
           <a href="channel.html?slug=${encodeURIComponent(slug)}" class="channel-card" data-categories="${cats}">
             <div class="channel-card-thumb"><span class="channel-card-thumb-placeholder">—</span></div>
