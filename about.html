@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Channel — Felix Bell</title>
-  <meta name="description" content="Felix Bell — Are.na channel" />
+  <title>About — Felix Bell</title>
 
   <link href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,31 +24,17 @@
       <button data-theme-toggle aria-label="Switch theme" class="theme-toggle">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a href="about.html" class="info-item info-about">About</a>
+      <a href="about.html" class="info-item info-about info-about--active">About</a>
     </div>
   </header>
 
-  <main>
-    <div class="channel-header" id="channel-header">
-      <a href="index.html" class="back-link">← back</a>
-      <h1 class="channel-title" id="channel-title">Loading…</h1>
-      <p class="channel-meta" id="channel-meta"></p>
-      <div class="channel-appears-in" id="channel-appears-in" style="display:none">
-        <span class="appears-in-label">This channel appears in</span>
-        <div class="appears-in-links" id="appears-in-links"></div>
-      </div>
-    </div>
-
-    <div class="blocks-grid" id="blocks-grid">
-      <!-- blocks loaded dynamically -->
-    </div>
-
-    <div class="load-more-wrap" id="load-more-wrap" style="display:none">
-      <button class="load-more-btn" id="load-more-btn">Load more</button>
+  <main class="about-main">
+    <div class="about-content">
+      <p class="about-bio">
+        Write something about yourself here.
+      </p>
     </div>
   </main>
-
-
 
   <!-- Ticker bar -->
   <div class="ticker-bar" id="ticker-bar" aria-label="Status" style="display:none">
@@ -63,17 +48,7 @@
     </div>
   </div>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" style="display:none">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
-    <div class="lightbox-inner">
-      <img class="lightbox-img" id="lightbox-img" src="" alt="" />
-      <div class="lightbox-caption" id="lightbox-caption"></div>
-    </div>
-  </div>
-
   <script src="theme.js"></script>
   <script src="ticker.js"></script>
-  <script src="channel.js"></script>
 </body>
 </html>
