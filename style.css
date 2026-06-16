@@ -215,7 +215,7 @@ body {
   display: flex;
   align-items: center;
   overflow: hidden;
-  height: 1.5rem;
+  height: 2rem;
   border-right: 1px solid var(--color-divider);
 }
 
