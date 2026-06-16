@@ -64,11 +64,16 @@ function startScroll(scrollEl) {
 function showRow(rowEl, scrollEl, items) {
   if (items.length > 0) {
     scrollEl.innerHTML = buildTickerTrack(items);
-    rowEl.style.display = 'flex';
+    rowEl.style.visibility = 'visible';
+    rowEl.style.flex = '1';
     startScroll(scrollEl);
     return true;
   } else {
-    rowEl.style.display = 'none';
+    rowEl.style.visibility = 'hidden';
+    rowEl.style.flex = '0';
+    rowEl.style.overflow = 'hidden';
+    rowEl.style.minWidth = '0';
+    rowEl.style.maxWidth = '0';
     return false;
   }
 }
@@ -84,14 +89,14 @@ async function initTickers() {
 
   const [workingItems, wantItems] = await Promise.all([
     fetchTextBlocks(TICKER_CHANNELS.working),
-    TICKER_CHANNELS.wantTo === PLACEHOLDER ? Promise.resolve([]) : fetchTextBlocks(TICKER_CHANNELS.wantTo),
+    fetchTextBlocks(TICKER_CHANNELS.wantTo),
   ]);
 
   const hasWorking = showRow(workingRow, workingScroll, workingItems);
   const hasWant    = showRow(wantRow, wantScroll, wantItems);
 
   if (hasWorking || hasWant) {
-    tickerBar.removeAttribute('style');
+    tickerBar.style.display = 'flex';
     tickerBar.style.opacity = '1';
   }
 }
