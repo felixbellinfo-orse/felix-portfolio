@@ -9,12 +9,12 @@ const ARENA_CHANNELS = [
   {
     slug: 'soundsystem-yu-vopqlbgg',
     label: 'soundsystem',
-    appearsIn: ['sound-p-hgk4lwt-k', 'installation-3ychr9gvdzg'],
+    appearsIn: ['sounds', 'installation'],
   },
    {
     slug: 'sound-rewire',
     label: 'sound rewire',
-    appearsIn: ['installation-3ychr9gvdzg'],
+    appearsIn: ['installation' , 'speakers'],
   },
   // Add more channels below as you create them on Are.na:
   // { slug: 'your-channel-slug', label: 'channel name', appearsIn: ['sound-xirpilcp9ru'] },
@@ -127,8 +127,7 @@ function applyFilter(filter) {
   document.querySelectorAll('#channels-grid .channel-card').forEach(card => {
     const cats = card.dataset.categories ? card.dataset.categories.split(' ') : [];
     const visible = filter === 'all' || cats.includes(filter);
-    // Use display none/block so cards reflow and don't leave empty gaps
-    card.style.display = visible ? '' : 'none';
+    card.classList.toggle('channel-card--hidden', !visible);
   });
 }
 
