@@ -215,7 +215,7 @@ body {
   display: flex;
   align-items: center;
   overflow: hidden;
-  height: 2rem;
+  height: 1.5rem;
   border-right: 1px solid var(--color-divider);
 }
 
@@ -225,8 +225,8 @@ body {
 
 .ticker-label {
   flex-shrink: 0;
-  width: 11rem;
-  min-width: 11rem;
+  width: 12rem;
+  min-width: 12rem;
   padding: 0 var(--space-5);
   font-size: var(--text-xs);
   font-family: var(--font-body);
