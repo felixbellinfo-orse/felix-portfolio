@@ -186,17 +186,23 @@ button {
 
 /* ---- Ticker ---- */
 .ticker-bar {
-  position: sticky;
-  top: var(--header-height, 57px);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 99;
   width: 100%;
   overflow: hidden;
-  border-bottom: 1px solid var(--color-divider);
+  border-top: 1px solid var(--color-divider);
   background: var(--color-bg);
   display: flex;
   flex-direction: row;
   opacity: 0;
   transition: opacity 400ms ease;
+}
+
+body {
+  padding-bottom: 2rem; /* space for fixed ticker */
 }
 
 .ticker-bar--loaded {

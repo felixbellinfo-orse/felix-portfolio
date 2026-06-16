@@ -9,12 +9,12 @@ const ARENA_CHANNELS = [
   {
     slug: 'soundsystem-yu-vopqlbgg',
     label: 'soundsystem',
-    appearsIn: ['sounds', 'installation'],
+    appearsIn: ['sound-p-hgk4lwt-k', 'installation-3ychr9gvdzg'],
   },
-   {
+  {
     slug: 'sound-rewire',
     label: 'sound rewire',
-    appearsIn: ['installation' , 'speakers'],
+    appearsIn: ['sound-p-hgk4lwt-k', 'installation-3ychr9gvdzg'],
   },
   // Add more channels below as you create them on Are.na:
   // { slug: 'your-channel-slug', label: 'channel name', appearsIn: ['sound-xirpilcp9ru'] },

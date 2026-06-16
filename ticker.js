@@ -15,7 +15,7 @@ const TICKER_CHANNELS = {
 
 const ARENA_API = 'https://api.are.na/v2/channels/';
 const SEPARATOR = '\u00a0\u00a0\u00a0\u2736\u00a0\u00a0\u00a0'; // ✶ with spacing
-const PLACEHOLDER = 'would-like-to-work-on1';
+const PLACEHOLDER = 'would-like-to-work-on';
 const SPEED = 60; // pixels per second — increase to scroll faster
 
 async function fetchTextBlocks(slug) {
