@@ -193,6 +193,8 @@ button {
   overflow: hidden;
   border-bottom: 1px solid var(--color-divider);
   background: var(--color-bg);
+  display: flex;
+  flex-direction: row;
   opacity: 0;
   transition: opacity 400ms ease;
 }
@@ -202,15 +204,17 @@ button {
 }
 
 .ticker-row {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   overflow: hidden;
   height: 2rem;
-  border-bottom: 1px solid var(--color-divider);
+  border-right: 1px solid var(--color-divider);
 }
 
 .ticker-row:last-child {
-  border-bottom: none;
+  border-right: none;
 }
 
 .ticker-label {
@@ -358,9 +362,8 @@ button {
 
 /* ---- Filter bar ---- */
 .filters-bar {
-  padding: var(--space-8) clamp(var(--space-6), 5vw, var(--space-12)) 0;
-  max-width: var(--content-default);
-  margin: 0 auto;
+  padding: var(--space-5) clamp(var(--space-6), 5vw, var(--space-12));
+  border-bottom: 1px solid var(--color-divider);
 }
 
 .filter-btns {
@@ -400,7 +403,7 @@ button {
   font-weight: 500;
 }
 
-/* Hidden card state — fade out but keep grid shape intact */
+/* Hidden card state (legacy, now using display:none via JS) */
 .channel-card--hidden {
   opacity: 0;
   pointer-events: none;

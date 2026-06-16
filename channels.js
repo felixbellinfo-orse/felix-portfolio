@@ -127,7 +127,8 @@ function applyFilter(filter) {
   document.querySelectorAll('#channels-grid .channel-card').forEach(card => {
     const cats = card.dataset.categories ? card.dataset.categories.split(' ') : [];
     const visible = filter === 'all' || cats.includes(filter);
-    card.classList.toggle('channel-card--hidden', !visible);
+    // Use display none/block so cards reflow and don't leave empty gaps
+    card.style.display = visible ? '' : 'none';
   });
 }
 
