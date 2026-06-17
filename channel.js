@@ -211,7 +211,7 @@ async function loadMore() {
 }
 
 async function fetchBlocks(slug, page) {
-  const res = await fetch(`${CHANNEL_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=updated_at&direction=desc`);
+  const res = await fetch(`${CHANNEL_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=position&direction=desc`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
