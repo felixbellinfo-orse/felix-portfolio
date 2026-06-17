@@ -3,7 +3,7 @@
 // ============================================================
 
 const CHANNEL_API = 'https://api.are.na/v2/channels/';
-const PER_PAGE = 24;
+const PER_PAGE = 100;
 
 let currentSlug = '';
 let currentPage = 1;
@@ -211,10 +211,16 @@ async function initChannel() {
 
     if (grid) grid.innerHTML = '';
     appendBlocks(blocksData.contents || []);
-    updateLoadMore();
 
-    const btn = document.getElementById('load-more-btn');
-    if (btn) btn.addEventListener('click', loadMore);
+    // Auto-load remaining pages silently
+    let page = 2;
+    while (page * PER_PAGE - PER_PAGE < totalBlocks) {
+      const more = await fetchBlocks(currentSlug, page);
+      appendBlocks(more.contents || []);
+      page++;
+    }
+
+    document.getElementById('load-more-wrap').style.display = 'none';
 
   } catch (err) {
     if (titleEl) titleEl.textContent = 'Channel';
