@@ -21,10 +21,10 @@
     <a href="tel:+31612345678" class="info-item">+31 6 1234 5678</a>
     <a href="mailto:felixbell.info@gmail.com" class="info-item">felixbell.info@gmail.com</a>
     <div class="info-right">
+      <a href="about.html" class="info-item info-about">About</a>
       <button data-theme-toggle aria-label="Switch theme" class="theme-toggle">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a href="about.html" class="info-item info-about">About</a>
     </div>
   </header>
 
@@ -56,6 +56,8 @@
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" style="display:none">
     <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
+    <button class="lightbox-arrow lightbox-arrow--prev" id="lightbox-prev" aria-label="Previous image">←</button>
+    <button class="lightbox-arrow lightbox-arrow--next" id="lightbox-next" aria-label="Next image">→</button>
     <div class="lightbox-inner">
       <img id="lightbox-img" src="" alt="" class="lightbox-img" />
       <div class="lightbox-meta" id="lightbox-meta" style="display:none">
