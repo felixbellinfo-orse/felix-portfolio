@@ -36,7 +36,7 @@ function skeletonCards(n) {
 }
 
 async function fetchChannelPreview(slug) {
-  const res = await fetch(`${CHANNELS_API}${slug}?per=8`);
+  const res = await fetch(`${CHANNELS_API}${slug}?per=50`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
