@@ -592,7 +592,13 @@ body {
 
 /* Hero — first full-width image block */
 .block-item.full.block-image {
-  height: clamp(280px, 55vh, 680px);
+  height: clamp(240px, 40vh, 480px);
+}
+
+.block-item.full.block-image img {
+  object-fit: contain;
+  padding: var(--space-6);
+  box-sizing: border-box;
 }
 
 .block-item.quarter {
