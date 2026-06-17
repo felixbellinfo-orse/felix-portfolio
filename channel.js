@@ -65,7 +65,6 @@ function parseDirectives(block) {
 // ---- Block size logic ----
 
 let blockCounter = 0;
-let heroPlaced = false;
 
 function getSizeClass(block, directives) {
   // Explicit directive overrides everything
@@ -77,12 +76,7 @@ function getSizeClass(block, directives) {
   if (block.class === 'Channel') return 'quarter';
 
   if (block.class === 'Image' || block.class === 'Attachment') {
-    // First image = auto hero
-    if (!heroPlaced) {
-      heroPlaced = true;
-      return 'full';
-    }
-    // Every 7th subsequent image = half
+    // Every 7th image = half
     blockCounter++;
     if (blockCounter % 7 === 0) return 'half';
   }
@@ -231,7 +225,6 @@ async function fetchChannelInfo(slug) {
 async function initChannel() {
   currentSlug = getSlugFromURL();
   if (!currentSlug) { window.location.href = 'index.html'; return; }
-  heroPlaced = false;
   blockCounter = 0;
 
   const titleEl = document.getElementById('channel-title');
