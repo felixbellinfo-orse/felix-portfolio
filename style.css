@@ -592,13 +592,15 @@ body {
 
 /* Hero — first full-width image block */
 .block-item.full.block-image {
-  height: clamp(240px, 40vh, 480px);
+  height: clamp(240px, 70vh, 90vh);
 }
 
 .block-item.full.block-image img {
   object-fit: contain;
-  padding: var(--space-6);
+  padding: var(--space-8);
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
 /* `layout: full contain` or `layout: half contain` from Are.na description */
@@ -625,19 +627,7 @@ body {
 }
 
 .block-image .block-title {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--space-2) var(--space-3);
-  font-size: 11px;
-  font-family: var(--font-body);
-  color: var(--color-text);
-  background: var(--color-bg);
-  border-top: 1px solid var(--color-divider);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: none;
 }
 
 /* Text blocks */
@@ -770,41 +760,68 @@ body {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.92);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: var(--space-8);
+  gap: var(--space-4);
 }
 
 .lightbox-close {
   position: absolute;
-  top: var(--space-6);
+  top: var(--space-5);
   right: var(--space-6);
-  font-size: 2rem;
-  color: rgba(255,255,255,0.7);
+  font-size: 1.8rem;
+  color: rgba(255,255,255,0.5);
   line-height: 1;
   transition: color var(--transition-interactive);
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .lightbox-close:hover { color: white; }
 
 .lightbox-inner {
-  max-width: min(90vw, 1000px);
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  max-width: min(92vw, 1100px);
+  max-height: 95vh;
 }
 
 .lightbox-img {
-  max-height: 80vh;
+  max-height: calc(95vh - 5rem); /* leave room for meta bar */
+  max-width: min(92vw, 1100px);
   width: auto;
-  max-width: 100%;
-  border-radius: var(--radius-sm);
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
-.lightbox-caption {
-  margin-top: var(--space-4);
+.lightbox-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  width: 100%;
+  justify-content: center;
+}
+
+.lightbox-title {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.6);
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+}
+
+.lightbox-date {
+  font-size: var(--text-xs);
+  font-family: var(--font-body);
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.03em;
 }
 
 /* ---- Footer ---- */

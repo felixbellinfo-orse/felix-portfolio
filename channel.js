@@ -99,8 +99,9 @@ function renderImageBlock(block) {
   const dir = parseDirectives(block);
   const sizeClass = getSizeClass(block, dir);
   const containClass = dir.contain ? ' contain' : '';
+  const date = block.created_at ? new Date(block.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
   const lightboxAttrs = dir.permalink
-    ? `data-lightbox data-src="${escapeAttr(large)}" data-caption="${escapeAttr(title)}" tabindex="0" role="button" aria-label="View image${title ? ': ' + escapeAttr(title) : ''}"`
+    ? `data-lightbox data-src="${escapeAttr(large)}" data-caption="${escapeAttr(title)}" data-date="${escapeAttr(date)}" tabindex="0" role="button" aria-label="View image${title ? ': ' + escapeAttr(title) : ''}"`
     : '';
 
   return `
@@ -275,14 +276,18 @@ async function initChannel() {
 
 // ---- Lightbox ----
 
-function openLightbox(src, caption) {
-  const lb = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  const cap = document.getElementById('lightbox-caption');
+function openLightbox(src, caption, date) {
+  const lb    = document.getElementById('lightbox');
+  const img   = document.getElementById('lightbox-img');
+  const meta  = document.getElementById('lightbox-meta');
+  const titleEl = document.getElementById('lightbox-title');
+  const dateEl  = document.getElementById('lightbox-date');
   if (!lb) return;
   img.src = src;
   img.alt = caption || '';
-  if (cap) cap.textContent = caption || '';
+  if (titleEl) titleEl.textContent = caption || '';
+  if (dateEl)  dateEl.textContent  = date || '';
+  if (meta) meta.style.display = (caption || date) ? 'flex' : 'none';
   lb.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
@@ -299,9 +304,9 @@ function closeLightbox() {
 function attachLightboxListeners() {
   document.querySelectorAll('[data-lightbox]:not([data-lb-bound])').forEach(el => {
     el.setAttribute('data-lb-bound', '1');
-    el.addEventListener('click', () => openLightbox(el.dataset.src, el.dataset.caption));
+    el.addEventListener('click', () => openLightbox(el.dataset.src, el.dataset.caption, el.dataset.date));
     el.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(el.dataset.src, el.dataset.caption); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(el.dataset.src, el.dataset.caption, el.dataset.date); }
     });
   });
 }
