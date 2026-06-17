@@ -31,17 +31,23 @@ function escapeAttr(str) {
 }
 
 // ---- Block size logic ----
-// Assign grid span classes to create a varied mosaic rhythm
 
 let blockCounter = 0;
+let heroPlaced = false; // tracks whether the first image has been used as hero
 
 function getSizeClass(block) {
   // Text blocks: always full width
   if (block.class === 'Text') return 'full';
   // Channel blocks: quarter (1 col)
   if (block.class === 'Channel') return 'quarter';
-  // Every 7th image block: half width
+
   if (block.class === 'Image' || block.class === 'Attachment') {
+    // First image ever = hero, spans all 4 columns
+    if (!heroPlaced) {
+      heroPlaced = true;
+      return 'full';
+    }
+    // Every 7th subsequent image = half width for rhythm
     blockCounter++;
     if (blockCounter % 7 === 0) return 'half';
   }
@@ -187,6 +193,8 @@ async function fetchChannelInfo(slug) {
 async function initChannel() {
   currentSlug = getSlugFromURL();
   if (!currentSlug) { window.location.href = 'index.html'; return; }
+  heroPlaced = false;
+  blockCounter = 0;
 
   const titleEl = document.getElementById('channel-title');
   const grid = document.getElementById('blocks-grid');

@@ -590,6 +590,11 @@ body {
   min-height: 200px;
 }
 
+/* Hero — first full-width image block */
+.block-item.full.block-image {
+  height: clamp(280px, 55vh, 680px);
+}
+
 .block-item.quarter {
   grid-column: span 1;
 }
