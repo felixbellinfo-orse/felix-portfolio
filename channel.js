@@ -1,5 +1,5 @@
 // ============================================================
-// CHANNEL PAGE — fetches and renders a single Are.na channel
+// CHANNEL PAGE — starstar-style mosaic grid layout
 // ============================================================
 
 const CHANNEL_API = 'https://api.are.na/v2/channels/';
@@ -12,123 +12,6 @@ let totalBlocks = 0;
 function getSlugFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get('slug') || '';
-}
-
-// ---- Block renderers ----
-
-function renderImageBlock(block) {
-  const img = block.image && block.image.display ? block.image.display.url : null;
-  if (!img) return null;
-  const title = block.title || '';
-  const desc = block.description ? `<p class="block-description">${escapeHtml(block.description)}</p>` : '';
-
-  return `
-    <div class="block-item block-image"
-         data-lightbox
-         data-src="${escapeAttr(block.image.original ? block.image.original.url : img)}"
-         data-caption="${escapeAttr(title)}"
-         tabindex="0"
-         role="button"
-         aria-label="View image: ${escapeAttr(title || 'image')}">
-      <img src="${escapeAttr(img)}" alt="${escapeAttr(title)}" loading="lazy" />
-      ${desc}
-    </div>
-  `;
-}
-
-function renderLinkBlock(block) {
-  const url = block.source && block.source.url ? block.source.url : '#';
-  const title = block.title || block.generated_title || 'Link';
-  const provider = block.source && block.source.provider ? block.source.provider.name : '';
-  const thumb = block.image && block.image.display ? block.image.display.url : null;
-  const desc = block.description ? `<p class="block-description">${escapeHtml(block.description)}</p>` : '';
-
-  const thumbHtml = thumb ? `<div class="block-link-thumb"><img src="${escapeAttr(thumb)}" alt="" loading="lazy" /></div>` : '';
-
-  return `
-    <div class="block-item">
-      <a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="block-link">
-        ${thumbHtml}
-        <div class="block-link-body">
-          <p class="block-link-title">${escapeHtml(title)}</p>
-          ${provider ? `<p class="block-link-source">${escapeHtml(provider)}</p>` : ''}
-        </div>
-      </a>
-      ${desc}
-    </div>
-  `;
-}
-
-function renderTextBlock(block) {
-  const html = block.content_html || (block.content ? `<p>${escapeHtml(block.content)}</p>` : '');
-  if (!html) return null;
-  return `
-    <div class="block-item">
-      <div class="block-text">
-        <div class="block-text-content">${html}</div>
-      </div>
-    </div>
-  `;
-}
-
-function renderMediaBlock(block) {
-  const url = block.source && block.source.url ? block.source.url : '#';
-  const title = block.title || block.generated_title || '';
-  const thumb = block.image && block.image.display ? block.image.display.url : null;
-  const desc = block.description ? `<p class="block-description">${escapeHtml(block.description)}</p>` : '';
-
-  const thumbHtml = thumb
-    ? `<div class="block-media-thumb">
-        <img src="${escapeAttr(thumb)}" alt="" loading="lazy" />
-        <span class="block-media-play">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </span>
-       </div>`
-    : '';
-
-  return `
-    <div class="block-item">
-      <a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="block-media">
-        ${thumbHtml}
-        ${title ? `<div class="block-media-body"><p class="block-media-title">${escapeHtml(title)}</p></div>` : ''}
-      </a>
-      ${desc}
-    </div>
-  `;
-}
-
-function renderChannelBlock(block) {
-  // Nested channel inside a channel
-  const title = block.title || 'Channel';
-  const url = `channel.html?slug=${encodeURIComponent(block.slug)}`;
-  const count = block.length || 0;
-  return `
-    <div class="block-item">
-      <a href="${url}" class="block-channel">
-        <p class="block-channel-label">channel · ${count} block${count !== 1 ? 's' : ''}</p>
-        <p class="block-channel-title">${escapeHtml(title)}</p>
-      </a>
-    </div>
-  `;
-}
-
-function renderBlock(block) {
-  switch (block.class) {
-    case 'Image':
-      return renderImageBlock(block);
-    case 'Link':
-      return renderLinkBlock(block);
-    case 'Text':
-      return renderTextBlock(block);
-    case 'Media':
-      return renderMediaBlock(block);
-    case 'Channel':
-      return renderChannelBlock(block);
-    case 'Attachment':
-      return renderLinkBlock(block); // treat as link
-    default:
-      return null;
-  }
 }
 
 // ---- Helpers ----
@@ -147,51 +30,116 @@ function escapeAttr(str) {
   return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-// ---- Appears In ----
+// ---- Block size logic ----
+// Assign grid span classes to create a varied mosaic rhythm
 
-function renderAppearsIn(info) {
-  const wrap = document.getElementById('channel-appears-in');
-  const linksEl = document.getElementById('appears-in-links');
-  if (!wrap || !linksEl) return;
+let blockCounter = 0;
 
-  // Are.na returns connected channels in info.connections (array of channel objects)
-  const connections = (info.connections || []).filter(c => c.class === 'Channel' || c.base_class === 'Channel');
-  if (connections.length === 0) return;
-
-  linksEl.innerHTML = connections.map(c => {
-    const slug = c.slug || '';
-    const title = c.title || slug;
-    const href = slug ? `channel.html?slug=${encodeURIComponent(slug)}` : '#';
-    return `<a href="${escapeAttr(href)}" class="appears-in-pill">${escapeHtml(title)}</a>`;
-  }).join('');
-
-  wrap.style.display = 'flex';
+function getSizeClass(block) {
+  // Text blocks: always full width
+  if (block.class === 'Text') return 'full';
+  // Channel blocks: quarter (1 col)
+  if (block.class === 'Channel') return 'quarter';
+  // Every 7th image block: half width
+  if (block.class === 'Image' || block.class === 'Attachment') {
+    blockCounter++;
+    if (blockCounter % 7 === 0) return 'half';
+  }
+  return 'quarter';
 }
 
-// ---- Fetch & render ----
+// ---- Block renderers ----
 
-async function fetchBlocks(slug, page) {
-  const res = await fetch(`${CHANNEL_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=position&direction=asc`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+function renderImageBlock(block) {
+  const img = block.image && block.image.display ? block.image.display.url : null;
+  if (!img) return null;
+  const large = block.image && block.image.original ? block.image.original.url : img;
+  const title = block.title || block.generated_title || '';
+  const sizeClass = getSizeClass(block);
+
+  return `
+    <div class="block-item block-image ${sizeClass}"
+         data-lightbox
+         data-src="${escapeAttr(large)}"
+         data-caption="${escapeAttr(title)}"
+         tabindex="0"
+         role="button"
+         aria-label="View image${title ? ': ' + escapeAttr(title) : ''}">
+      <img src="${escapeAttr(img)}" alt="${escapeAttr(title)}" loading="lazy" />
+      ${title ? `<span class="block-title">${escapeHtml(title)}</span>` : ''}
+    </div>
+  `;
 }
 
-async function fetchChannelInfo(slug) {
-  const res = await fetch(`${CHANNEL_API}${slug}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+function renderTextBlock(block) {
+  const html = block.content_html || (block.content ? `<p>${block.content}</p>` : '');
+  if (!html) return null;
+  const title = block.title || '';
+  return `
+    <div class="block-item block-text full">
+      ${title ? `<p class="block-title">${escapeHtml(title)}</p>` : ''}
+      <div class="block-text-content">${html}</div>
+    </div>
+  `;
 }
+
+function renderLinkBlock(block) {
+  const url = block.source && block.source.url ? block.source.url : '#';
+  const title = block.title || block.generated_title || url;
+  const thumb = block.image && block.image.display ? block.image.display.url : null;
+  const sizeClass = thumb ? getSizeClass(block) : 'quarter';
+
+  if (thumb) {
+    return `
+      <a href="${escapeAttr(url)}" target="_blank" rel="noopener"
+         class="block-item block-image block-link ${sizeClass}">
+        <img src="${escapeAttr(thumb)}" alt="${escapeAttr(title)}" loading="lazy" />
+        <span class="block-title">${escapeHtml(title)}</span>
+      </a>
+    `;
+  }
+
+  return `
+    <a href="${escapeAttr(url)}" target="_blank" rel="noopener"
+       class="block-item block-link-text quarter">
+      <span class="block-link-inner">${escapeHtml(title)}</span>
+    </a>
+  `;
+}
+
+function renderChannelBlock(block) {
+  const title = block.title || 'Channel';
+  const url = `channel.html?slug=${encodeURIComponent(block.slug)}`;
+  return `
+    <a href="${url}" class="block-item block-channel quarter">
+      <span class="block-channel-inner">${escapeHtml(title)}</span>
+    </a>
+  `;
+}
+
+function renderBlock(block) {
+  switch (block.class) {
+    case 'Image':      return renderImageBlock(block);
+    case 'Text':       return renderTextBlock(block);
+    case 'Link':       return renderLinkBlock(block);
+    case 'Media':      return renderLinkBlock(block);
+    case 'Attachment': return renderImageBlock(block);
+    case 'Channel':    return renderChannelBlock(block);
+    default:           return null;
+  }
+}
+
+// ---- Render & fetch ----
 
 function appendBlocks(blocks) {
   const grid = document.getElementById('blocks-grid');
   blocks.forEach(block => {
     const html = renderBlock(block);
-    if (html) {
-      const div = document.createElement('div');
-      div.innerHTML = html.trim();
-      const el = div.firstChild;
-      grid.appendChild(el);
-    }
+    if (!html) return;
+    const div = document.createElement('div');
+    div.innerHTML = html.trim();
+    const el = div.firstChild;
+    grid.appendChild(el);
   });
   attachLightboxListeners();
 }
@@ -201,7 +149,6 @@ function updateLoadMore() {
   const wrap = document.getElementById('load-more-wrap');
   const btn = document.getElementById('load-more-btn');
   if (!wrap || !btn) return;
-
   if (loaded < totalBlocks) {
     wrap.style.display = 'block';
     btn.textContent = `Load more (${totalBlocks - loaded} remaining)`;
@@ -218,61 +165,60 @@ async function loadMore() {
     const data = await fetchBlocks(currentSlug, currentPage);
     appendBlocks(data.contents || []);
     updateLoadMore();
-  } catch (err) {
+  } catch {
     if (btn) { btn.textContent = 'Error — try again'; btn.disabled = false; }
   } finally {
     if (btn) btn.disabled = false;
   }
 }
 
+async function fetchBlocks(slug, page) {
+  const res = await fetch(`${CHANNEL_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=position&direction=asc`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function fetchChannelInfo(slug) {
+  const res = await fetch(`${CHANNEL_API}${slug}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
 async function initChannel() {
   currentSlug = getSlugFromURL();
-  if (!currentSlug) {
-    window.location.href = 'index.html';
-    return;
-  }
+  if (!currentSlug) { window.location.href = 'index.html'; return; }
 
   const titleEl = document.getElementById('channel-title');
-  const metaEl = document.getElementById('channel-meta');
   const grid = document.getElementById('blocks-grid');
 
   // Skeleton
   if (grid) {
-    grid.innerHTML = Array.from({ length: 9 }, () => `
-      <div class="block-item" style="height:200px;background:var(--color-surface-offset);animation:skeleton-pulse 1.6s ease-in-out infinite;"></div>
+    grid.innerHTML = Array.from({ length: 12 }, (_, i) => `
+      <div class="block-item quarter skeleton-block" style="animation-delay:${i * 60}ms"></div>
     `).join('');
   }
 
   try {
-    // Fetch channel info and first page of blocks in parallel
     const [info, blocksData] = await Promise.all([
       fetchChannelInfo(currentSlug),
       fetchBlocks(currentSlug, 1)
     ]);
 
-    // Update page title
     const title = info.title || currentSlug;
     document.title = `${title} — Felix Bell`;
     if (titleEl) titleEl.textContent = title;
-    if (metaEl) metaEl.textContent = '';
-
     totalBlocks = info.length || 0;
 
-    // Render "This channel appears in" connections
-    renderAppearsIn(info);
-
-    // Clear skeleton and render blocks
     if (grid) grid.innerHTML = '';
     appendBlocks(blocksData.contents || []);
     updateLoadMore();
 
-    // Load more button
     const btn = document.getElementById('load-more-btn');
     if (btn) btn.addEventListener('click', loadMore);
 
   } catch (err) {
     if (titleEl) titleEl.textContent = 'Channel';
-    if (grid) grid.innerHTML = `<p class="error-state">Could not load channel. <a href="https://www.are.na/felix-bell/${currentSlug}" target="_blank" rel="noopener">View on Are.na ↗</a></p>`;
+    if (grid) grid.innerHTML = `<p class="error-state" style="padding:2rem">Could not load channel.</p>`;
   }
 }
 
@@ -288,7 +234,6 @@ function openLightbox(src, caption) {
   if (cap) cap.textContent = caption || '';
   lb.style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  lb.focus();
 }
 
 function closeLightbox() {
@@ -303,30 +248,18 @@ function closeLightbox() {
 function attachLightboxListeners() {
   document.querySelectorAll('[data-lightbox]:not([data-lb-bound])').forEach(el => {
     el.setAttribute('data-lb-bound', '1');
-    el.addEventListener('click', function () {
-      openLightbox(this.dataset.src, this.dataset.caption);
-    });
-    el.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openLightbox(this.dataset.src, this.dataset.caption);
-      }
+    el.addEventListener('click', () => openLightbox(el.dataset.src, el.dataset.caption));
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(el.dataset.src, el.dataset.caption); }
     });
   });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   initChannel();
-
   const closeBtn = document.getElementById('lightbox-close');
   const lb = document.getElementById('lightbox');
   if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-  if (lb) {
-    lb.addEventListener('click', function (e) {
-      if (e.target === lb) closeLightbox();
-    });
-  }
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeLightbox();
-  });
+  if (lb) lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 });

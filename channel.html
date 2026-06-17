@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Channel — Felix Bell</title>
-  <meta name="description" content="Felix Bell — Are.na channel" />
 
   <link href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,27 +28,18 @@
     </div>
   </header>
 
-  <main>
-    <div class="channel-header" id="channel-header">
-      <a href="index.html" class="back-link">← back</a>
-      <h1 class="channel-title" id="channel-title">Loading…</h1>
-      <p class="channel-meta" id="channel-meta"></p>
-      <div class="channel-appears-in" id="channel-appears-in" style="display:none">
-        <span class="appears-in-label">This channel appears in</span>
-        <div class="appears-in-links" id="appears-in-links"></div>
-      </div>
-    </div>
+  <!-- Channel title bar -->
+  <div class="channel-title-bar">
+    <a href="index.html" class="back-link">← back</a>
+    <h1 class="channel-title" id="channel-title">Loading…</h1>
+  </div>
 
-    <div class="blocks-grid" id="blocks-grid">
-      <!-- blocks loaded dynamically -->
-    </div>
+  <!-- Mosaic grid -->
+  <div class="blocks-grid" id="blocks-grid"></div>
 
-    <div class="load-more-wrap" id="load-more-wrap" style="display:none">
-      <button class="load-more-btn" id="load-more-btn">Load more</button>
-    </div>
-  </main>
-
-
+  <div class="load-more-wrap" id="load-more-wrap" style="display:none">
+    <button class="load-more-btn" id="load-more-btn">Load more</button>
+  </div>
 
   <!-- Ticker bar -->
   <div class="ticker-bar" id="ticker-bar" aria-label="Status" style="display:none">
@@ -67,8 +57,8 @@
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" style="display:none">
     <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
     <div class="lightbox-inner">
-      <img class="lightbox-img" id="lightbox-img" src="" alt="" />
-      <div class="lightbox-caption" id="lightbox-caption"></div>
+      <img id="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption" id="lightbox-caption"></p>
     </div>
   </div>
 
