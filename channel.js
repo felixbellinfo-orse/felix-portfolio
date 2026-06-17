@@ -30,24 +30,59 @@ function escapeAttr(str) {
   return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+// ---- Are.na description directive parser ----
+// Add directives to a block's description on Are.na to control layout:
+//   `layout: full`         → spans all 4 columns
+//   `layout: full contain` → spans all 4 columns, image contained with padding
+//   `layout: half`         → spans 2 columns
+//   `layout: quarter`      → 1 column (default)
+//   `permalink: false`     → clicking won't open lightbox
+
+function parseDirectives(block) {
+  const desc = block.description || '';
+  const directives = { layout: null, contain: false, permalink: true };
+  if (!desc) return directives;
+
+  // Match `layout: full contain`, `layout: half`, etc.
+  const layoutMatch = desc.match(/layout:\s*([\w\s]+)/i);
+  if (layoutMatch) {
+    const val = layoutMatch[1].trim().toLowerCase();
+    if (val.includes('full')) directives.layout = 'full';
+    else if (val.includes('half')) directives.layout = 'half';
+    else if (val.includes('quarter')) directives.layout = 'quarter';
+    if (val.includes('contain')) directives.contain = true;
+  }
+
+  // Match `permalink: false`
+  const permalinkMatch = desc.match(/permalink:\s*(\w+)/i);
+  if (permalinkMatch && permalinkMatch[1].toLowerCase() === 'false') {
+    directives.permalink = false;
+  }
+
+  return directives;
+}
+
 // ---- Block size logic ----
 
 let blockCounter = 0;
-let heroPlaced = false; // tracks whether the first image has been used as hero
+let heroPlaced = false;
 
-function getSizeClass(block) {
+function getSizeClass(block, directives) {
+  // Explicit directive overrides everything
+  if (directives.layout) return directives.layout;
+
   // Text blocks: always full width
   if (block.class === 'Text') return 'full';
-  // Channel blocks: quarter (1 col)
+  // Channel blocks: quarter
   if (block.class === 'Channel') return 'quarter';
 
   if (block.class === 'Image' || block.class === 'Attachment') {
-    // First image ever = hero, spans all 4 columns
+    // First image = auto hero
     if (!heroPlaced) {
       heroPlaced = true;
       return 'full';
     }
-    // Every 7th subsequent image = half width for rhythm
+    // Every 7th subsequent image = half
     blockCounter++;
     if (blockCounter % 7 === 0) return 'half';
   }
@@ -61,16 +96,15 @@ function renderImageBlock(block) {
   if (!img) return null;
   const large = block.image && block.image.original ? block.image.original.url : img;
   const title = block.title || block.generated_title || '';
-  const sizeClass = getSizeClass(block);
+  const dir = parseDirectives(block);
+  const sizeClass = getSizeClass(block, dir);
+  const containClass = dir.contain ? ' contain' : '';
+  const lightboxAttrs = dir.permalink
+    ? `data-lightbox data-src="${escapeAttr(large)}" data-caption="${escapeAttr(title)}" tabindex="0" role="button" aria-label="View image${title ? ': ' + escapeAttr(title) : ''}"`
+    : '';
 
   return `
-    <div class="block-item block-image ${sizeClass}"
-         data-lightbox
-         data-src="${escapeAttr(large)}"
-         data-caption="${escapeAttr(title)}"
-         tabindex="0"
-         role="button"
-         aria-label="View image${title ? ': ' + escapeAttr(title) : ''}">
+    <div class="block-item block-image ${sizeClass}${containClass}" ${lightboxAttrs}>
       <img src="${escapeAttr(img)}" alt="${escapeAttr(title)}" loading="lazy" />
       ${title ? `<span class="block-title">${escapeHtml(title)}</span>` : ''}
     </div>
@@ -81,8 +115,10 @@ function renderTextBlock(block) {
   const html = block.content_html || (block.content ? `<p>${block.content}</p>` : '');
   if (!html) return null;
   const title = block.title || '';
+  const dir = parseDirectives(block);
+  const sizeClass = dir.layout || 'full';
   return `
-    <div class="block-item block-text full">
+    <div class="block-item block-text ${sizeClass}">
       ${title ? `<p class="block-title">${escapeHtml(title)}</p>` : ''}
       <div class="block-text-content">${html}</div>
     </div>
@@ -93,7 +129,8 @@ function renderLinkBlock(block) {
   const url = block.source && block.source.url ? block.source.url : '#';
   const title = block.title || block.generated_title || url;
   const thumb = block.image && block.image.display ? block.image.display.url : null;
-  const sizeClass = thumb ? getSizeClass(block) : 'quarter';
+  const dir = parseDirectives(block);
+  const sizeClass = thumb ? getSizeClass(block, dir) : 'quarter';
 
   if (thumb) {
     return `

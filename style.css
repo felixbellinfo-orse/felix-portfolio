@@ -601,6 +601,13 @@ body {
   box-sizing: border-box;
 }
 
+/* `layout: full contain` or `layout: half contain` from Are.na description */
+.block-item.contain img {
+  object-fit: contain;
+  padding: var(--space-6);
+  box-sizing: border-box;
+}
+
 .block-item.quarter {
   grid-column: span 1;
 }
