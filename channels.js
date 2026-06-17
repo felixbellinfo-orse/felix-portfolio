@@ -42,7 +42,21 @@ async function fetchChannelPreview(slug) {
 }
 
 
+// Read `thumbnail: <url>` from the channel's own description on Are.na
+function getChannelThumbFromDescription(channel) {
+  const desc = channel.metadata && channel.metadata.description
+    ? channel.metadata.description
+    : channel.description || '';
+  if (!desc) return null;
+  const match = desc.match(/thumbnail:\s*(https?:\/\/\S+)/i);
+  return match ? match[1].trim() : null;
+}
+
 function getChannelThumb(channel) {
+  // Prefer explicit thumbnail directive in channel description
+  const explicit = getChannelThumbFromDescription(channel);
+  if (explicit) return explicit;
+  // Fall back to first image block in the channel
   if (!channel.contents) return null;
   for (const block of channel.contents) {
     if (block.image && block.image.display && block.image.display.url) {
