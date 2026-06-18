@@ -304,7 +304,7 @@ body {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   height: 100%;
   padding: 0 var(--space-4);
   font-size: var(--text-xs);
@@ -314,7 +314,7 @@ body {
   color: var(--color-text);
   text-decoration: none;
   white-space: nowrap;
-  border-right: 1px solid var(--color-divider);
+  border-right: 0px solid var(--color-divider);
   transition: background var(--transition-interactive);
 }
 
@@ -323,8 +323,8 @@ body {
 }
 
 .info-name {
-  font-family: var(--font-display);
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-weight: 400;
   letter-spacing: 0.02em;
   font-size: var(--text-sm);
   flex: 1.2;
@@ -339,9 +339,9 @@ body {
 }
 
 .info-about {
-  font-weight: 500;
+  font-weight: 400;
   border-right: none;
-  border-left: 1px solid var(--color-divider);
+  border-left: 0px solid var(--color-divider);
   flex: 0 0 auto;
   padding: 0 var(--space-6);
 }
