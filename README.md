@@ -107,21 +107,44 @@ const ARENA_CHANNELS = [
 
 ## Day-to-day workflow
 
+### Pull (get latest from GitHub before editing)
+
 ```bash
-git pull                        # get latest before editing
-# make your changes in VS Code
-git add .
-git commit -m "describe change"
-git push                        # site updates in ~1 minute
+git pull
 ```
+
+Always do this first before making changes, especially if you've edited on another machine.
+
+### Push (send your changes to GitHub)
+
+```bash
+git add .
+git commit -m "describe what you changed"
+git push
+```
+
+The site updates at [felixbellinfo-orse.github.io/felix-portfolio](https://felixbellinfo-orse.github.io/felix-portfolio/) within about a minute.
+
+### If your local files are out of date and you want to force-reset to GitHub
+
+```bash
+git fetch origin && git reset --hard origin/main
+```
+
+Warning — this overwrites any local changes you haven't pushed yet.
 
 ---
 
 ## Local preview
 
 ```bash
-npm start     # runs live-server, opens browser at localhost:8080
-              # requires: npm install -g live-server (once only)
+npm start     # starts local server at http://localhost:3000
+```
+
+If you get "address already in use":
+
+```bash
+kill $(lsof -t -i:3000) && npm start
 ```
 
 ---
