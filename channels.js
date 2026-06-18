@@ -8,7 +8,7 @@ const ARENA_CHANNELS = [
   {
     slug: 'soundsystem-yu-vopqlbgg',
     label: 'soundsystem',
-    tags: ['sound', 'installation'],
+    tags: ['sound', ],
   },
   {
     slug: 'sound-rewire',
@@ -68,48 +68,27 @@ function formatDate(iso) {
 
 // ---- Card renderer ----
 
-function parseChannelDesc(channel) {
-  const desc = (channel.metadata && channel.metadata.description)
-    ? channel.metadata.description
-    : channel.description || '';
-  const role = (desc.match(/role:\s*(.+)/i) || [])[1];
-  const with_ = (desc.match(/with:\s*(.+)/i) || [])[1];
-  return { role: role ? role.trim() : '', with: with_ ? with_.trim() : '' };
-}
-
 function renderChannelCard(channel, slug, label, tags) {
   const thumb = getChannelThumb(channel);
   const url = `channel.html?slug=${encodeURIComponent(slug)}`;
   const created = formatDate(channel.created_at);
   const updated = formatDate(channel.updated_at);
   const cats = (tags || []).join(' ');
-  const { role, with: withVal } = parseChannelDesc(channel);
 
   const thumbHtml = thumb
     ? `<img src="${thumb}" alt="${label}" loading="lazy" />`
     : `<span class="channel-card-thumb-placeholder">—</span>`;
 
-  const roleWith = (role || withVal) ? `
-    <div class="channel-card-rolewith">
-      ${role    ? `<span class="channel-card-role">Role: ${role}</span>` : ''}
-      ${withVal ? `<span class="channel-card-with">With: ${withVal}</span>` : ''}
-    </div>` : '';
-
-  const dateMeta = (created || updated) ? `
-    <div class="channel-card-dates">
-      ${created ? `<span>Started ${created}</span>` : ''}
-      ${updated ? `<span>Updated ${updated}</span>` : ''}
-    </div>` : '';
+  const dateMeta = (created || updated)
+    ? `<p class="channel-card-meta">${created ? `Started ${created}` : ''}${created && updated ? '<br>' : ''}${updated ? `Updated ${updated}` : ''}</p>`
+    : '';
 
   return `
     <a href="${url}" class="channel-card" data-categories="${cats}">
       <div class="channel-card-thumb">${thumbHtml}</div>
       <div class="channel-card-body">
         <h2 class="channel-card-title">${label || channel.title}</h2>
-        ${roleWith}
-        <div class="channel-card-footer">
-          ${dateMeta}
-        </div>
+        ${dateMeta}
       </div>
     </a>
   `;
