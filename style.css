@@ -543,6 +543,9 @@ body {
   display: flex;
   align-items: center;
   padding: 0 var(--space-4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .channel-card-dates span + span {
