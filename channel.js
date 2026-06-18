@@ -2,8 +2,7 @@
 // CHANNEL PAGE — starstar-style mosaic grid layout
 // ============================================================
 
-const IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-const CHANNEL_API = IS_LOCAL ? '/arena/channels/' : 'https://api.are.na/v2/channels/';
+const CHANNEL_API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? '/arena/channels/' : 'https://api.are.na/v2/channels/';
 const PER_PAGE = 100;
 
 let currentSlug = '';

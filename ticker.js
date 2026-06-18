@@ -13,8 +13,7 @@ const TICKER_CHANNELS = {
   wantTo:  'would-like-to-work-on',  // ← replace with your slug when ready
 };
 
-const IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-const ARENA_API = IS_LOCAL ? '/arena/channels/' : 'https://api.are.na/v2/channels/';
+const ARENA_API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? '/arena/channels/' : 'https://api.are.na/v2/channels/';
 const SEPARATOR = '\u00a0\u00a0\u00a0\u2736\u00a0\u00a0\u00a0'; // ✶ with spacing
 const PLACEHOLDER = ''; // no placeholder — both channels are live
 const SPEED = 60; // pixels per second — increase to scroll faster
