@@ -506,22 +506,22 @@ body {
 }
 
 .channel-card-body {
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-2) var(--space-5);
   border: 1px solid var(--color-divider);
   border-top: none;
 }
 
 .channel-card-title {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: var(--text-lg);
-  font-weight: 400;
+  font-weight: 300;
   color: var(--color-text);
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 .channel-card-role,
 .channel-card-with {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--color-text-faint);
   letter-spacing: 0.02em;
 }
@@ -535,6 +535,7 @@ body {
 
 .channel-card-role {
   padding-bottom: var(--space-2);
+   border-top: 1px solid var(--color-divider);
 }
 
 .channel-card-with {
@@ -550,7 +551,7 @@ body {
 
 .channel-card-dates {
   display: flex;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--color-text-faint);
   letter-spacing: 0.02em;
 }
