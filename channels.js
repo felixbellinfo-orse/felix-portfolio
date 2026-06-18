@@ -133,31 +133,16 @@ function buildFilters(tags) {
 }
 
 function applyFilter(filter) {
-  // Update active button
   document.querySelectorAll('.filter-btn').forEach(btn => {
     const isActive = btn.dataset.filter === filter;
     btn.classList.toggle('filter-btn--active', isActive);
     btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
   });
 
-  const cards = document.querySelectorAll('#channels-grid .channel-card');
-
-  cards.forEach(card => {
+  document.querySelectorAll('#channels-grid .channel-card').forEach(card => {
     const cats = card.dataset.categories ? card.dataset.categories.split(' ') : [];
     const visible = filter === 'all' || cats.includes(filter);
-
-    if (visible) {
-      // Make sure it's shown and fully opaque
-      card.classList.remove('channel-card--hidden', 'channel-card--hiding');
-      card.style.opacity = '1';
-    } else {
-      // Fade out then remove from flow
-      card.style.opacity = '0';
-      setTimeout(() => {
-        card.classList.add('channel-card--hidden');
-        card.style.opacity = '';
-      }, 200);
-    }
+    card.style.display = visible ? '' : 'none';
   });
 }
 
