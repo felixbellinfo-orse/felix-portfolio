@@ -15,6 +15,11 @@ const ARENA_CHANNELS = [
     label: 'sound rewire',
     tags: ['sound', 'installation'],
   },
+    {
+    slug: 'two-sisters',
+    label: 'two sisters',
+    tags: ['sound', 'speakers'],
+    },
   // Add more channels below:
   // { slug: 'your-channel-slug', label: 'channel name', tags: ['sound'] },
 ];
