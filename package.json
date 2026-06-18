@@ -1,6 +1,6 @@
 {
   "name": "felix-portfolio",
   "scripts": {
-    "start": "live-server"
+    "start": "node server.js"
   }
 }

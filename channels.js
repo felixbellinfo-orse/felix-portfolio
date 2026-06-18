@@ -19,7 +19,8 @@ const ARENA_CHANNELS = [
   // { slug: 'your-channel-slug', label: 'channel name', tags: ['sound'] },
 ];
 
-const CHANNELS_API = 'https://api.are.na/v2/channels/';
+const IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+const CHANNELS_API = IS_LOCAL ? '/arena/channels/' : 'https://api.are.na/v2/channels/';
 
 // ---- Helpers ----
 
