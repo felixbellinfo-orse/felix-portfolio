@@ -133,17 +133,36 @@ function buildFilters(tags) {
 }
 
 function applyFilter(filter) {
+  // Update active button
   document.querySelectorAll('.filter-btn').forEach(btn => {
     const isActive = btn.dataset.filter === filter;
     btn.classList.toggle('filter-btn--active', isActive);
     btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
   });
 
-  document.querySelectorAll('#channels-grid .channel-card').forEach(card => {
+  const cards = document.querySelectorAll('#channels-grid .channel-card');
+
+  // Step 1: fade out cards that should hide
+  cards.forEach(card => {
     const cats = card.dataset.categories ? card.dataset.categories.split(' ') : [];
     const visible = filter === 'all' || cats.includes(filter);
-    card.classList.toggle('channel-card--hidden', !visible);
+    if (!visible) {
+      card.classList.remove('channel-card--hidden');
+      card.classList.add('channel-card--hiding');
+    } else {
+      card.classList.remove('channel-card--hidden', 'channel-card--hiding');
+    }
   });
+
+  // Step 2: after fade completes, fully hide so grid reflows
+  setTimeout(() => {
+    cards.forEach(card => {
+      if (card.classList.contains('channel-card--hiding')) {
+        card.classList.remove('channel-card--hiding');
+        card.classList.add('channel-card--hidden');
+      }
+    });
+  }, 200);
 }
 
 // ---- Init ----

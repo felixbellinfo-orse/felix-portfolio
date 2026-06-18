@@ -401,9 +401,9 @@ body {
 }
 
 .filter-btns {
-  display:  0 0 auto;;
+  display: flex;
   flex-wrap: wrap;
-  gap: 0rem;
+  gap: 0;
   align-items: center;
 }
 
@@ -414,27 +414,34 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: 0.04em;
+  color: var(--color-text-faint);
   background: transparent;
+  border: none;
   cursor: pointer;
-  transition:
-    color var(--transition-interactive),
-    border-color var(--transition-interactive),
-    background var(--transition-interactive);
+  transition: color 150ms ease;
 }
 
 .filter-btn:hover {
   color: var(--color-text);
-  border-color: var(--color-text-muted);
 }
 
 .filter-btn--active {
   color: var(--color-text);
-  border-color: var(--color-text);
-  background: transparent;
   font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* Hidden card state */
+/* Card fade transition */
+.channel-card {
+  transition: opacity 200ms ease;
+}
+
+.channel-card--hiding {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .channel-card--hidden {
   display: none;
 }
