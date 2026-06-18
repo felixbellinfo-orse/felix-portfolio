@@ -142,27 +142,23 @@ function applyFilter(filter) {
 
   const cards = document.querySelectorAll('#channels-grid .channel-card');
 
-  // Step 1: fade out cards that should hide
   cards.forEach(card => {
     const cats = card.dataset.categories ? card.dataset.categories.split(' ') : [];
     const visible = filter === 'all' || cats.includes(filter);
-    if (!visible) {
-      card.classList.remove('channel-card--hidden');
-      card.classList.add('channel-card--hiding');
-    } else {
+
+    if (visible) {
+      // Make sure it's shown and fully opaque
       card.classList.remove('channel-card--hidden', 'channel-card--hiding');
+      card.style.opacity = '1';
+    } else {
+      // Fade out then remove from flow
+      card.style.opacity = '0';
+      setTimeout(() => {
+        card.classList.add('channel-card--hidden');
+        card.style.opacity = '';
+      }, 200);
     }
   });
-
-  // Step 2: after fade completes, fully hide so grid reflows
-  setTimeout(() => {
-    cards.forEach(card => {
-      if (card.classList.contains('channel-card--hiding')) {
-        card.classList.remove('channel-card--hiding');
-        card.classList.add('channel-card--hidden');
-      }
-    });
-  }, 200);
 }
 
 // ---- Init ----

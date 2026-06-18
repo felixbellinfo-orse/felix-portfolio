@@ -433,15 +433,6 @@ body {
 }
 
 /* Card fade transition */
-.channel-card {
-  transition: opacity 200ms ease;
-}
-
-.channel-card--hiding {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .channel-card--hidden {
   display: none;
 }
@@ -462,7 +453,7 @@ body {
   display: block;
   text-decoration: none;
   overflow: hidden;
-  transition: transform var(--transition-interactive);
+  transition: opacity 200ms ease, transform var(--transition-interactive);
 }
 
 .channel-card:hover {
