@@ -396,7 +396,7 @@ body {
 
 /* ---- Filter bar ---- */
 .filters-bar {
-  padding: var(--space-5) clamp(var(--space-6), 5vw, var(--space-12));
+  padding: var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--color-divider);
 }
 
@@ -434,25 +434,14 @@ body {
   font-weight: 500;
 }
 
-/* Hidden card state (legacy, now using display:none via JS) */
+/* Hidden card state */
 .channel-card--hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity 200ms ease, visibility 200ms ease;
-}
-
-.channel-card:not(.channel-card--hidden) {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 200ms ease, visibility 200ms ease, transform var(--transition-interactive);
+  display: none;
 }
 
 /* ---- Channels index ---- */
 .channels-section {
-  padding: clamp(var(--space-4), 8vw, var(--space-4)) clamp(var(--space-4), 5vw, var(--space-4));
-  max-width: var(--content-default);
-  margin: 0 auto;
+  padding: var(--space-4);
 }
 
 .channels-grid {
