@@ -49,6 +49,11 @@ layout: half
 2 columns × 2 rows.
 
 ```
+layout: hero
+```
+Full width, tall fixed height (about 75% of the screen). Image is cropped to fill — like the original hero treatment. Good for a lead image at the top of a channel.
+
+```
 layout: full
 ```
 All 4 columns.
