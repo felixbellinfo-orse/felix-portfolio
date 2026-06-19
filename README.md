@@ -70,13 +70,32 @@ permalink: false
 
 ## Default behaviour (no directives)
 
-If a block has no description directives:
+Everything is **1 column × 1 row** by default. Use `layout:` directives to make anything bigger.
 
-- **First image** in the channel → automatically full width (hero)
-- **Every 7th image** → half width (for rhythm)
-- **All other images** → 1 column
-- **Text blocks** → always full width
-- **Channel blocks** → 1 column
+---
+
+## Choosing a thumbnail for a channel card
+
+By default the first image in a channel is used as the card thumbnail on the index page. To pick a specific image, go to that block on Are.na, open its description field, and add:
+
+```
+thumbnail: true
+```
+
+Only one block per channel needs this.
+
+---
+
+## Adding channel info (Role / With)
+
+To show Role and With on a channel card, go to the **channel's own description** on Are.na and add:
+
+```
+role: Sound Engineer
+with: V&A
+```
+
+Each on its own line. These appear below the title on the index card.
 
 ---
 
@@ -149,6 +168,22 @@ kill $(lsof -t -i:3000) && npm start
 
 ---
 
+## Editing the header
+
+Open `header.js` — change any value in the `HEADER_INFO` object at the top. It updates across all pages automatically.
+
+```js
+const HEADER_INFO = {
+  name:     'Felix Bell',
+  tagline:  'Sound & Space',
+  location: 'Rotterdam',
+  phone:    '+31 6 1234 5678',
+  email:    'felixbell.info@gmail.com',
+};
+```
+
+---
+
 ## File structure
 
 ```
@@ -156,10 +191,12 @@ index.html      — home page, lists all channels
 channel.html    — single channel view, shows all blocks
 about.html      — about page
 style.css       — all styles
+header.js       — shared header (edit here to update all pages)
 channels.js     — fetches and renders the channel index
 channel.js      — fetches and renders a single channel's blocks
 ticker.js       — scrolling ticker bar (Are.na text blocks)
 theme.js        — light/dark mode toggle
+server.js       — local dev server (proxies Are.na API)
 README.md       — this file
 ```
 
