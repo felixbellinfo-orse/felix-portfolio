@@ -151,7 +151,8 @@ function renderLinkBlock(block) {
   const title = block.title || block.generated_title || url;
   const thumb = block.image && block.image.display ? block.image.display.url : null;
   const dir = parseDirectives(block);
-  const sizeClass = thumb ? getSizeClass(block, dir) : 'quarter';
+  // Link blocks default to quarter — use layout: directive to override
+  const sizeClass = dir.layout || 'quarter';
 
   if (thumb) {
     return `
