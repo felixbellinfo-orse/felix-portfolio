@@ -70,16 +70,19 @@ function getSizeClass(block, directives) {
   // Explicit directive overrides everything
   if (directives.layout) return directives.layout;
 
-  // Text blocks: always full width
-  if (block.class === 'Text') return 'full';
-  // Channel blocks: quarter
+  // Text blocks: 2 cols × 2 rows
+  if (block.class === 'Text') return 'text';
+
+  // Channel blocks: 1 column
   if (block.class === 'Channel') return 'quarter';
 
+  // Image/Attachment: every 7th = half, rest = quarter
   if (block.class === 'Image' || block.class === 'Attachment') {
-    // Every 7th image = half
     blockCounter++;
     if (blockCounter % 7 === 0) return 'half';
+    return 'quarter';
   }
+
   return 'quarter';
 }
 
