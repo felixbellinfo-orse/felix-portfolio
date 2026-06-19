@@ -36,7 +36,12 @@ Spans 2 columns.
 ```
 layout: quarter
 ```
-1 column. This is the default — you only need to write this if you want to override an auto-hero.
+1 column × 1 row. This is the default.
+
+```
+layout: tall
+```
+1 column × 2 rows. Good for portrait images.
 
 ### Combining with contain
 
