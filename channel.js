@@ -87,10 +87,7 @@ function getSizeClass(block, directives) {
   // Image/Attachment: every 7th gets landscape=half or portrait=tall
   if (block.class === 'Image' || block.class === 'Attachment') {
     blockCounter++;
-    if (blockCounter % 7 === 0) {
-      const orientation = getImageOrientation(block);
-      return orientation === 'landscape' ? 'half' : 'tall';
-    }
+    if (blockCounter % 7 === 0) return 'half';
     return 'quarter';
   }
 
