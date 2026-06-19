@@ -18,7 +18,7 @@
 
   <!-- Channel title bar -->
   <div class="channel-title-bar">
-    <a href="index.html" class="back-link">← back</a>
+    <a href="index.html" class="back-link" id="back-link">← back</a>
     <h1 class="channel-title" id="channel-title">Loading…</h1>
   </div>
 
@@ -55,6 +55,16 @@
     </div>
   </div>
 
+  <script>
+    // Back button: go to previous page if available, else home
+    const backLink = document.getElementById('back-link');
+    if (backLink && history.length > 1) {
+      backLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        history.back();
+      });
+    }
+  </script>
   <script src="header.js"></script>
   <script src="theme.js"></script>
   <script src="ticker.js"></script>
