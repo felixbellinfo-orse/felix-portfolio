@@ -661,6 +661,13 @@ body {
 
 .block-item.quarter {
   grid-column: span 1;
+  aspect-ratio: 1 / 1;
+}
+
+.block-item.quarter.block-text,
+.block-item.long.block-text {
+  aspect-ratio: auto;
+  min-height: 160px;
 }
 
 /* Image blocks */
