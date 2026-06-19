@@ -39,24 +39,37 @@ function escapeAttr(str) {
 //   `permalink: false`     → clicking won't open lightbox
 
 function parseDirectives(block) {
-  const desc = block.description || '';
+  // Strip markdown formatting (code fences, bold, italic, backticks)
+  const desc = (block.description || '')
+    .replace(/```/g, '')
+    .replace(/\*\*/g, '')
+    .replace(/\*/g, '')
+    .replace(/`/g, '');
+
   const directives = { layout: null, contain: false, permalink: true };
   if (!desc) return directives;
 
-  // Match `layout: full contain`, `layout: half`, etc.
+  // Match layout: full / half / long / tall / quarter
   const layoutMatch = desc.match(/layout:\s*([\w\s]+)/i);
   if (layoutMatch) {
     const val = layoutMatch[1].trim().toLowerCase();
-    if (val.includes('full')) directives.layout = 'full';
-    else if (val.includes('half')) directives.layout = 'half';
+    if (val.includes('full'))    directives.layout = 'full';
+    else if (val.includes('half'))    directives.layout = 'half';
+    else if (val.includes('long'))    directives.layout = 'long';
+    else if (val.includes('tall'))    directives.layout = 'tall';
     else if (val.includes('quarter')) directives.layout = 'quarter';
     if (val.includes('contain')) directives.contain = true;
   }
 
-  // Match `permalink: false`
+  // Match permalink: false
   const permalinkMatch = desc.match(/permalink:\s*(\w+)/i);
   if (permalinkMatch && permalinkMatch[1].toLowerCase() === 'false') {
     directives.permalink = false;
+  }
+
+  // Match thumbnail: true
+  if (/thumbnail:\s*true/i.test(desc)) {
+    directives.thumbnail = true;
   }
 
   return directives;

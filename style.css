@@ -634,6 +634,10 @@ body {
 }
 
 /* Every 7th image: landscape = 2 cols, portrait = 2 rows */
+.block-item.long {
+  grid-column: span 2;
+}
+
 .block-item.half {
   grid-column: span 2;
   grid-row: span 2;

@@ -51,7 +51,8 @@ function getChannelThumb(channel) {
   if (!channel.contents) return null;
   // First pass: look for a block with `thumbnail: true` in its description
   for (const block of channel.contents) {
-    const desc = block.description || '';
+    const desc = (block.description || '')
+      .replace(/```/g, '').replace(/\*\*/g, '').replace(/`/g, '');
     if (/thumbnail:\s*true/i.test(desc) && block.image && block.image.display) {
       return block.image.display.url;
     }

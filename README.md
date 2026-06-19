@@ -29,19 +29,29 @@ layout: full contain
 Spans all 4 columns, image sits centred with padding around it (not cropped). Good for portrait images or diagrams.
 
 ```
-layout: half
-```
-2 columns × 2 rows.
-
-```
 layout: quarter
 ```
-1 column × 1 row. This is the default.
+1 column × 1 row. Default — no need to write this unless undoing another directive.
 
 ```
 layout: tall
 ```
 1 column × 2 rows. Good for portrait images.
+
+```
+layout: long
+```
+2 columns × 1 row. Good for landscape images.
+
+```
+layout: half
+```
+2 columns × 2 rows.
+
+```
+layout: full
+```
+All 4 columns.
 
 ### Combining with contain
 
