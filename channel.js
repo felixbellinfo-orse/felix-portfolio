@@ -65,6 +65,7 @@ function parseDirectives(block) {
 // ---- Block size logic ----
 
 let blockCounter = 0;
+let textBlockCount = 0; // alternates text between col 1-2 and col 2-3
 
 function getImageOrientation(block) {
   const w = block.image && block.image.display && block.image.display.width;
@@ -125,16 +126,20 @@ function renderTextBlock(block) {
   const title = block.title || '';
   const dir = parseDirectives(block);
 
-  let sizeClass;
+  let sizeClass, colStyle = '';
   if (dir.layout) {
     sizeClass = dir.layout;
   } else {
     const charCount = (block.content || '').length;
     sizeClass = charCount >= 850 ? 'text-large' : 'text-small';
+    // Alternate between col 1-2 and col 2-3, never 3-4
+    const colStart = (textBlockCount % 2 === 0) ? 1 : 2;
+    colStyle = `style="grid-column: ${colStart} / span 2;"`;
+    textBlockCount++;
   }
 
   return `
-    <div class="block-item block-text ${sizeClass}">
+    <div class="block-item block-text ${sizeClass}" ${colStyle}>
       ${title ? `<p class="block-title">${escapeHtml(title)}</p>` : ''}
       <div class="block-text-content">${html}</div>
     </div>
@@ -247,6 +252,7 @@ async function initChannel() {
   currentSlug = getSlugFromURL();
   if (!currentSlug) { window.location.href = 'index.html'; return; }
   blockCounter = 0;
+  textBlockCount = 0;
 
   const titleEl = document.getElementById('channel-title');
   const grid = document.getElementById('blocks-grid');

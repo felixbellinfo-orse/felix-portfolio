@@ -584,6 +584,7 @@ body {
 .blocks-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
   gap: 1px;
   background: var(--color-divider);
   padding-bottom: 3rem; /* space above fixed ticker */
