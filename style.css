@@ -606,11 +606,6 @@ body {
   cursor: default;
 }
 
-.block-item.half {
-  grid-column: span 2;
-  aspect-ratio: 1 / 1;
-}
-
 .block-item.full {
   grid-column: 1 / -1;
   aspect-ratio: auto;
@@ -637,9 +632,25 @@ body {
   box-sizing: border-box;
 }
 
-.block-item.text {
+/* Every 7th image: landscape = 2 cols, portrait = 2 rows */
+.block-item.half {
+  grid-column: span 2;
+}
+
+.block-item.tall {
+  grid-row: span 2;
+}
+
+/* Text blocks */
+.block-item.text-small {
+  grid-column: span 2;
+  text-align: left;
+}
+
+.block-item.text-large {
   grid-column: span 2;
   grid-row: span 2;
+  text-align: left;
 }
 
 .block-item.quarter {

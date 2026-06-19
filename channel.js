@@ -66,20 +66,30 @@ function parseDirectives(block) {
 
 let blockCounter = 0;
 
+function getImageOrientation(block) {
+  const w = block.image && block.image.display && block.image.display.width;
+  const h = block.image && block.image.display && block.image.display.height;
+  if (w && h) return w >= h ? 'landscape' : 'portrait';
+  return 'landscape'; // default
+}
+
 function getSizeClass(block, directives) {
   // Explicit directive overrides everything
   if (directives.layout) return directives.layout;
 
-  // Text blocks: 2 cols × 2 rows
-  if (block.class === 'Text') return 'text';
+  // Text: handled in renderTextBlock via character count
+  if (block.class === 'Text') return null;
 
   // Channel blocks: 1 column
   if (block.class === 'Channel') return 'quarter';
 
-  // Image/Attachment: every 7th = half, rest = quarter
+  // Image/Attachment: every 7th gets landscape=half or portrait=tall
   if (block.class === 'Image' || block.class === 'Attachment') {
     blockCounter++;
-    if (blockCounter % 7 === 0) return 'half';
+    if (blockCounter % 7 === 0) {
+      const orientation = getImageOrientation(block);
+      return orientation === 'landscape' ? 'half' : 'tall';
+    }
     return 'quarter';
   }
 
@@ -114,7 +124,15 @@ function renderTextBlock(block) {
   if (!html) return null;
   const title = block.title || '';
   const dir = parseDirectives(block);
-  const sizeClass = dir.layout || 'full';
+
+  let sizeClass;
+  if (dir.layout) {
+    sizeClass = dir.layout;
+  } else {
+    const charCount = (block.content || '').length;
+    sizeClass = charCount >= 850 ? 'text-large' : 'text-small';
+  }
+
   return `
     <div class="block-item block-text ${sizeClass}">
       ${title ? `<p class="block-title">${escapeHtml(title)}</p>` : ''}
