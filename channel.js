@@ -67,30 +67,9 @@ function parseDirectives(block) {
 let blockCounter = 0;
 let textBlockCount = 0; // alternates text between col 1-2 and col 2-3
 
-function getImageOrientation(block) {
-  const w = block.image && block.image.display && block.image.display.width;
-  const h = block.image && block.image.display && block.image.display.height;
-  if (w && h) return w >= h ? 'landscape' : 'portrait';
-  return 'landscape'; // default
-}
-
 function getSizeClass(block, directives) {
   // Explicit directive overrides everything
   if (directives.layout) return directives.layout;
-
-  // Text: handled in renderTextBlock via character count
-  if (block.class === 'Text') return null;
-
-  // Channel blocks: 1 column
-  if (block.class === 'Channel') return 'quarter';
-
-  // Image/Attachment: every 7th gets landscape=half or portrait=tall
-  if (block.class === 'Image' || block.class === 'Attachment') {
-    blockCounter++;
-    if (blockCounter % 7 === 0) return 'half';
-    return 'quarter';
-  }
-
   return 'quarter';
 }
 
@@ -123,17 +102,8 @@ function renderTextBlock(block) {
   const title = block.title || '';
   const dir = parseDirectives(block);
 
-  let sizeClass, colStyle = '';
-  if (dir.layout) {
-    sizeClass = dir.layout;
-  } else {
-    const charCount = (block.content || '').length;
-    sizeClass = charCount >= 850 ? 'text-large' : 'text-small';
-    // Alternate between col 1-2 and col 2-3, never 3-4
-    const colStart = (textBlockCount % 2 === 0) ? 1 : 2;
-    colStyle = `style="grid-column: ${colStart} / span 2;"`;
-    textBlockCount++;
-  }
+  const sizeClass = dir.layout || 'quarter';
+  const colStyle = '';
 
   return `
     <div class="block-item block-text ${sizeClass}" ${colStyle}>
