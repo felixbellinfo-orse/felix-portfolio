@@ -31,7 +31,7 @@ Spans all 4 columns, image sits centred with padding around it (not cropped). Go
 ```
 layout: half
 ```
-Spans 2 columns.
+2 columns × 2 rows.
 
 ```
 layout: quarter
