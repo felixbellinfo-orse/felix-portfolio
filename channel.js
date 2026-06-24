@@ -117,12 +117,14 @@ function renderTextBlock(block) {
   const dir = parseDirectives(block);
 
   const sizeClass = dir.layout || 'quarter';
-  const colStyle = '';
+  const containClass = dir.contain ? ' contain' : '';
 
   return `
-    <div class="block-item block-text ${sizeClass}" ${colStyle}>
-      ${title ? `<p class="block-title">${escapeHtml(title)}</p>` : ''}
-      <div class="block-text-content">${html}</div>
+    <div class="block-item block-text ${sizeClass}${containClass}">
+      <div class="block-text-inner">
+        ${title ? `<p class="block-title">${escapeHtml(title)}</p>` : ''}
+        <div class="block-text-content">${html}</div>
+      </div>
     </div>
   `;
 }

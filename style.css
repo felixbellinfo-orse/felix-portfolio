@@ -655,6 +655,19 @@ body {
   box-sizing: border-box;
 }
 
+/* Text block with layout: full contain — narrow centered column */
+.block-item.full.contain.block-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+.block-item.full.contain.block-text .block-text-inner {
+  max-width: 600px;
+  width: 100%;
+}
+
 /* Every 7th image: landscape = 2 cols, portrait = 2 rows */
 .block-item.long {
   grid-column: span 2;
