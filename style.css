@@ -767,9 +767,11 @@ body {
 .block-link-thumb img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   transition: opacity 0.2s;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .block-link-card-inner:hover .block-link-thumb img {
