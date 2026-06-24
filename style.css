@@ -635,11 +635,17 @@ body {
   object-fit: contain;
   padding: 32px;
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* Give full contain a fixed height so padding actually shrinks the image */
+/* Give full contain a fixed height so portrait images don't stretch */
 .block-item.full.contain.block-image {
   height: clamp(240px, 70vh, 90vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Text block with layout: full contain — narrow centered column */
