@@ -138,6 +138,8 @@ function renderLinkBlock(block) {
   const dir = parseDirectives(block);
   const sizeClass = dir.layout || 'quarter';
 
+  const hostname = url !== '#' ? (() => { try { return new URL(url).hostname; } catch(e) { return url; } })() : '';
+
   return `
     <div class="block-item block-link-card ${sizeClass}">
       <a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="block-link-card-inner">
@@ -145,7 +147,10 @@ function renderLinkBlock(block) {
           ? `<div class="block-link-thumb"><img src="${escapeAttr(thumb)}" alt="${escapeAttr(title)}" loading="lazy" /></div>`
           : `<div class="block-link-thumb block-link-thumb-empty"></div>`
         }
-        <div class="block-link-label">${escapeHtml(title)}</div>
+        <div class="block-link-info">
+          <span class="block-link-title">${escapeHtml(title)}</span>
+          <span class="block-link-url">${escapeHtml(hostname)}</span>
+        </div>
       </a>
     </div>
   `;
