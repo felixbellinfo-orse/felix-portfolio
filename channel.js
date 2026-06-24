@@ -49,8 +49,8 @@ function parseDirectives(block) {
   const directives = { layout: null, contain: false, permalink: true };
   if (!desc) return directives;
 
-  // Match layout: full / half / long / tall / quarter
-  const layoutMatch = desc.match(/layout:\s*([\w\s]+)/i);
+  // Match layout: full / half / long / tall / quarter / full contain
+  const layoutMatch = desc.match(/layout:\s*([^\n\r]+)/i);
   if (layoutMatch) {
     const val = layoutMatch[1].trim().toLowerCase();
     if (val.includes('full'))    directives.layout = 'full';
@@ -60,6 +60,9 @@ function parseDirectives(block) {
     else if (val.includes('quarter')) directives.layout = 'quarter';
     if (val.includes('contain')) directives.contain = true;
   }
+
+  // Also catch contain: true as its own directive on any line
+  if (/contain:\s*true/i.test(desc)) directives.contain = true;
 
   // Match permalink: false
   const permalinkMatch = desc.match(/permalink:\s*(\w+)/i);
