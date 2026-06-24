@@ -629,8 +629,13 @@ body {
 /* `layout: full contain` or `layout: half contain` from Are.na description */
 .block-item.contain img {
   object-fit: contain;
-  padding: var(--space-4);
+  padding: var(--space-8) var(--space-16);
   box-sizing: border-box;
+}
+
+/* Give full contain a fixed height so padding actually shrinks the image */
+.block-item.full.contain.block-image {
+  height: clamp(240px, 70vh, 90vh);
 }
 
 /* Text block with layout: full contain — narrow centered column */
