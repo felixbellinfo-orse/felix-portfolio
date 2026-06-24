@@ -53,8 +53,7 @@ function parseDirectives(block) {
   const layoutMatch = desc.match(/layout:\s*([\w\s]+)/i);
   if (layoutMatch) {
     const val = layoutMatch[1].trim().toLowerCase();
-    if (val.includes('hero'))    directives.layout = 'hero';
-    else if (val.includes('full'))    directives.layout = 'full';
+    if (val.includes('full'))    directives.layout = 'full';
     else if (val.includes('half'))    directives.layout = 'half';
     else if (val.includes('long'))    directives.layout = 'long';
     else if (val.includes('tall'))    directives.layout = 'tall';
