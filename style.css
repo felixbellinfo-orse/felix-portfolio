@@ -640,6 +640,14 @@ body {
   display: block;
 }
 
+/* Text block with layout: hero — centered */
+.block-item.hero.block-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 /* `layout: full contain` or `layout: half contain` from Are.na description */
 .block-item.contain img {
   object-fit: contain;
