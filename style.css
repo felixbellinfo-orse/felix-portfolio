@@ -743,36 +743,61 @@ body {
 .block-text-content p { margin-bottom: var(--space-4); }
 .block-text-content p:last-child { margin-bottom: 0; }
 
-/* Link blocks with thumbnail */
-.block-link {
-  display: block;
+/* Link card blocks */
+.block-item.block-link-card {
+  overflow: visible;
+  aspect-ratio: auto;
+  background: transparent;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.block-link-card-inner {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   width: 100%;
   height: 100%;
 }
 
-.block-link img {
+.block-link-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  outline: 1px solid var(--color-divider);
+}
+
+.block-link-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: opacity 0.2s;
 }
 
-/* Link blocks without image */
-.block-link-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  padding: var(--space-4);
-  background: var(--color-bg);
-  transition: background var(--transition-interactive);
+.block-link-card-inner:hover .block-link-thumb img {
+  opacity: 0.85;
 }
 
-.block-link-text:hover {
-  background: color-mix(in srgb, var(--color-accent) 8%, var(--color-bg));
+.block-link-thumb-empty {
+  background: var(--color-surface);
 }
 
+.block-link-label {
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.block-link-card-inner:hover .block-link-label {
+  color: var(--color-accent);
+}
+
+/* Legacy — kept for safety */
 .block-link-inner {
   font-size: var(--text-sm);
   color: var(--color-text);

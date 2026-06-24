@@ -136,24 +136,18 @@ function renderLinkBlock(block) {
   const title = block.title || block.generated_title || url;
   const thumb = block.image && block.image.display ? block.image.display.url : null;
   const dir = parseDirectives(block);
-  // Link blocks default to quarter — use layout: directive to override
   const sizeClass = dir.layout || 'quarter';
 
-  if (thumb) {
-    return `
-      <a href="${escapeAttr(url)}" target="_blank" rel="noopener"
-         class="block-item block-image block-link ${sizeClass}">
-        <img src="${escapeAttr(thumb)}" alt="${escapeAttr(title)}" loading="lazy" />
-        <span class="block-title">${escapeHtml(title)}</span>
-      </a>
-    `;
-  }
-
   return `
-    <a href="${escapeAttr(url)}" target="_blank" rel="noopener"
-       class="block-item block-link-text quarter">
-      <span class="block-link-inner">${escapeHtml(title)}</span>
-    </a>
+    <div class="block-item block-link-card ${sizeClass}">
+      <a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="block-link-card-inner">
+        ${thumb
+          ? `<div class="block-link-thumb"><img src="${escapeAttr(thumb)}" alt="${escapeAttr(title)}" loading="lazy" /></div>`
+          : `<div class="block-link-thumb block-link-thumb-empty"></div>`
+        }
+        <div class="block-link-label">${escapeHtml(title)}</div>
+      </a>
+    </div>
   `;
 }
 
