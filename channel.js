@@ -271,8 +271,8 @@ async function initChannel() {
     if (titleBar && (role || withVal)) {
       const meta = document.createElement('div');
       meta.className = 'channel-title-meta';
-      if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${escapeHtml(role)}</span>`;
-      if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${escapeHtml(withVal)}</span>`;
+      if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${role}</span>`;
+      if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${withVal}</span>`;
       // Insert after title, before back link
       titleBar.insertBefore(meta, backLink);
     }
