@@ -259,8 +259,8 @@ async function initChannel() {
     document.title = `${title} — Felix Bell`;
     if (titleEl) titleEl.textContent = title;
 
-    // Parse role: and with: from channel description
-    const desc = info.description || '';
+    // Parse role: and with: from channel description (stored in metadata.description)
+    const desc = (info.metadata && info.metadata.description) || info.description || '';
     const roleMatch = desc.match(/role:\s*(.+)/i);
     const withMatch = desc.match(/with:\s*(.+)/i);
     const role = roleMatch ? roleMatch[1].trim() : null;
