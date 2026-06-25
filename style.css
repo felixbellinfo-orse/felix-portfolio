@@ -1,7 +1,7 @@
 /* ============================================================
    FELIX BELL — PORTFOLIO
    Palette: warm linen / raw wood / off-white paper
-   Fonts: Boska (display) + Work Sans (body)
+   Font: Geist
    ============================================================ */
 
 /* ---- Custom palette (warm, tactile, earthy) ---- */
@@ -39,8 +39,8 @@
   --content-default: 1100px;
   --content-narrow: 700px;
 
-  --font-display: 'Boska', 'Georgia', serif;
-  --font-body: 'Work Sans', 'Helvetica Neue', sans-serif;
+  --font-display: 'Geist', sans-serif;
+  --font-body: 'Geist', sans-serif;
 
   /* Type scale */
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
