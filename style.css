@@ -564,7 +564,10 @@ body {
 .channel-title-meta {
   display: flex;
   gap: var(--space-4);
-  margin-right: auto;
+}
+
+.back-link {
+  margin-left: auto;
 }
 
 .channel-meta-role,
