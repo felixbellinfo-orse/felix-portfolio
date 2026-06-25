@@ -267,12 +267,14 @@ async function initChannel() {
     const withVal = withMatch ? withMatch[1].trim() : null;
 
     const titleBar = document.querySelector('.channel-title-bar');
+    const backLink = document.getElementById('back-link');
     if (titleBar && (role || withVal)) {
       const meta = document.createElement('div');
       meta.className = 'channel-title-meta';
-      if (role) meta.innerHTML += `<span class="channel-meta-role">${escapeHtml(role)}</span>`;
-      if (withVal) meta.innerHTML += `<span class="channel-meta-with">${escapeHtml(withVal)}</span>`;
-      titleBar.appendChild(meta);
+      if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${escapeHtml(role)}</span>`;
+      if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${escapeHtml(withVal)}</span>`;
+      // Insert after title, before back link
+      titleBar.insertBefore(meta, backLink);
     }
     totalBlocks = info.length || 0;
 
