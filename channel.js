@@ -258,6 +258,22 @@ async function initChannel() {
     const title = info.title || currentSlug;
     document.title = `${title} — Felix Bell`;
     if (titleEl) titleEl.textContent = title;
+
+    // Parse role: and with: from channel description
+    const desc = info.description || '';
+    const roleMatch = desc.match(/role:\s*(.+)/i);
+    const withMatch = desc.match(/with:\s*(.+)/i);
+    const role = roleMatch ? roleMatch[1].trim() : null;
+    const withVal = withMatch ? withMatch[1].trim() : null;
+
+    const titleBar = document.querySelector('.channel-title-bar');
+    if (titleBar && (role || withVal)) {
+      const meta = document.createElement('div');
+      meta.className = 'channel-title-meta';
+      if (role) meta.innerHTML += `<span class="channel-meta-role">${escapeHtml(role)}</span>`;
+      if (withVal) meta.innerHTML += `<span class="channel-meta-with">${escapeHtml(withVal)}</span>`;
+      titleBar.appendChild(meta);
+    }
     totalBlocks = info.length || 0;
 
     if (grid) grid.innerHTML = '';
