@@ -6,7 +6,7 @@ const HEADER_INFO = {
   name:     'Felix Bell',
   tagline:  'Sound & Space',
   location: 'Rotterdam',
-  phone:    '+31 6 1234 5678',
+  phone:    '+31 6 8785 1523',
   email:    'felixbell.info@gmail.com',
 };
 
@@ -18,7 +18,7 @@ const HEADER_INFO = {
     <a href="index.html" class="info-item info-name">${HEADER_INFO.name}</a>
     <span class="info-item">${HEADER_INFO.tagline}</span>
     <span class="info-item">${HEADER_INFO.location}</span>
-    <a href="tel:${HEADER_INFO.phone.replace(/\s/g,'')}" class="info-item">${HEADER_INFO.phone}</a>
+    <span class="info-item">${HEADER_INFO.phone}</span>
     <a href="mailto:${HEADER_INFO.email}" class="info-item">${HEADER_INFO.email}</a>
     <div class="info-right">
       <a href="about.html" class="info-item info-about">About</a>
