@@ -330,6 +330,13 @@ body {
   flex: 0 0 auto;
 }
 
+.info-name:hover {
+  color: var(--color-primary-hover);
+  font-family: var(--font-decorative);
+  
+}
+
+
 .info-right {
   display: flex;
   align-items: center;
@@ -350,7 +357,10 @@ body {
   background: color-mix(in srgb, var(--color-text) 6%, transparent);
 }
 
-.info-about:hover{ color: var(--color-primary-hover); }
+.info-about:hover{ 
+color: var(--color-primary-hover); 
+font-family: var(--font-decorative);
+}
 
 .theme-toggle {
   display: flex;
@@ -367,7 +377,10 @@ body {
   flex-shrink: 0;
 }
 
-.theme-toggle:hover { color: var(--color-primary-hover); }
+.theme-toggle:hover { 
+color: var(--color-primary-hover); 
+
+}
 
 
 
@@ -425,11 +438,13 @@ body {
 
 .filter-btn:hover {
   color: var(--color-primary-hover);
+  font-family: var(--font-decorative);
+  
 }
 
 .filter-btn--active {
   color: var(--color-primary-hover);
-  font-weight: 500;
+  font-family: var(--font-decorative);
   
 }
 
