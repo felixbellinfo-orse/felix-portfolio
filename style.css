@@ -16,8 +16,8 @@
   --color-border: #9DAC98;
 
   --color-text: #333102;
-  --color-text-muted: #96a796;
-  --color-text-faint: #96a796;
+  --color-text-muted: #848170;
+  --color-text-faint: #afb0a1;
   --color-text-inverse: #f9f7f3;
 
   /* Accent: warm clay/terracotta */
@@ -67,7 +67,7 @@
 }
 
 [data-theme='dark'] {
-  --color-bg: #181702;
+  --color-bg: #1d1c02;
   --color-surface: #1e1c14;
   --color-surface-2: #23211a;
   --color-surface-offset: #1c1a12;
@@ -76,8 +76,8 @@
   --color-border: #3a3829;
 
   --color-text: #eaf3e7;
-  --color-text-muted: #C7CFC4;
-  --color-text-faint: #A0A69D;
+  --color-text-muted: #A0A69D;
+  --color-text-faint: #848a81;
   --color-text-inverse: #1e1c14;
 
   --color-primary: #c4845c;
@@ -507,6 +507,7 @@ body {
   height: 2.2rem;
   padding: 0 var(--space-0);
   border-bottom: 1px solid var(--color-divider);
+  border-top: 1px solid var(--color-divider);
 }
 
 .channel-card-rolewith {
@@ -579,7 +580,8 @@ body {
 }
 
 .back-link {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
+  font-weight: 400;
   color: var(--color-text-muted);
   letter-spacing: 0.04em;
   white-space: nowrap;
