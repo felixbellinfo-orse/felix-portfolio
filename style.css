@@ -314,6 +314,7 @@ button {
   letter-spacing: 0.02em;
   font-size: var(--text-sm);
   flex: 0 0 auto;
+  min-width: 8rem;
 }
 
 .info-name:hover {
