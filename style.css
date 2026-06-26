@@ -1060,6 +1060,7 @@ font-size: var(--text-sm);
   line-height: 1.7;
   color: var(--color-text);
   margin-bottom: var(--space-4);
+  text-align: left;
 }
 
 .about-prose p:last-child {
