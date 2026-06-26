@@ -217,6 +217,44 @@ README.md       — this file
 
 ---
 
+## Editing the about page
+
+Open `about.html` in VS Code. Everything between the two comments is yours to edit directly.
+
+### Adding a section
+
+```html
+<section class="about-section">
+  <h2 class="about-heading">Section title</h2>
+  <p>Your text here.</p>
+  <p>Another paragraph.</p>
+</section>
+```
+
+### Adding a divider between sections
+
+```html
+<hr class="about-divider">
+```
+
+### Adding a link
+
+```html
+<a href="https://example.com">link text</a>
+```
+
+### Adding an email link
+
+```html
+<a href="mailto:you@example.com">you@example.com</a>
+```
+
+### Removing a section
+
+Delete everything from `<section class="about-section">` to the matching `</section>`.
+
+---
+
 ## Hosting
 
 Site is live at [felixbellinfo-orse.github.io/felix-portfolio](https://felixbellinfo-orse.github.io/felix-portfolio/)
