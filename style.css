@@ -516,7 +516,6 @@ button {
   flex: 1;
   display: flex;
   align-items: center;
-  padding: 0 var(--space-2);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -764,7 +763,6 @@ button {
 
 .block-link-info {
   padding: var(--space-2) var(--space-3);
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -772,6 +770,7 @@ button {
 }
 
 .block-link-title {
+ 
   font-size: var(--text-xs);
   color: var(--color-text);
   line-height: 1.3;
