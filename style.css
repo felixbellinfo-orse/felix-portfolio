@@ -41,6 +41,7 @@
 
   --font-display: 'Geist', sans-serif;
   --font-body: 'Geist', sans-serif;
+  --font-decorative: 'Uncial Antiqua', serif;
 
   /* Type scale */
   --text-ss: clamp(0.5rem, 0.6rem + 0.15vw, 0.675rem);
