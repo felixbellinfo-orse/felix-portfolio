@@ -42,6 +42,7 @@
   --font-display: 'Geist', sans-serif;
   --font-body: 'Geist', sans-serif;
   --font-decorative: 'Cormorant Unicase', serif;
+  --font-decorative-weight: 500;
 
   /* Type scale */
   --text-ss: clamp(0.5rem, 0.6rem + 0.15vw, 0.675rem);
@@ -360,8 +361,9 @@ font-family: var(--font-decorative);
 }
 
 .info-about:hover{ 
-color: var(--color-primary-hover); 
-font-family: var(--font-decorative);
+  color: var(--color-primary-hover); 
+  font-family: var(--font-decorative);
+  font-weight: 500;
 }
 
 .theme-toggle {
@@ -441,13 +443,13 @@ color: var(--color-primary-hover);
 .filter-btn:hover {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
-  
+  font-weight: 500;
 }
 
 .filter-btn--active {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
-  
+  font-weight: 500;
 }
 
 /* Card fade transition */
@@ -1033,7 +1035,50 @@ font-size: var(--text-sm);
 }
 
 /* ---- Footer ---- */
-/* ---- About page ---- */
+/* ---- About page — prose layout ---- */
+.about-prose {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6) var(--space-16);
+}
+
+.about-section {
+  margin-bottom: var(--space-8);
+}
+
+.about-heading {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.about-prose p {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.about-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.about-prose a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-divider {
+  border: none;
+  border-top: 1px solid var(--color-divider);
+  margin: var(--space-8) 0;
+}
+
+/* ---- Old about page ---- */
 .about-main {
   max-width: 640px;
   margin: 0 auto;
