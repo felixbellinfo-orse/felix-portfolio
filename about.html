@@ -5,20 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Felix Bell</title>
 
+  <link href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Cormorant+Unicase:wght@300..700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header class="site-header"></header>
+  <header class="site-header">
+    <a href="index.html" class="info-item info-name">Felix Bell</a>
+    <span class="info-item">Sound &amp; Space</span>
+    <span class="info-item">Rotterdam</span>
+    <a href="tel:+31612345678" class="info-item">+31 6 8785 1523</a>
+    <a href="mailto:felixbell.info@gmail.com" class="info-item">felixbell.info@gmail.com</a>
+    <div class="info-right">
+      <a href="about.html" class="info-item info-about info-about--active">About</a>
+      <button data-theme-toggle aria-label="Switch theme" class="theme-toggle">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
 
   <main class="about-main">
     <div class="about-content">
       <p class="about-bio">
-        Write something about yourself here.
+        Felix is a spatial designer and object maker whose work reflects on the tension between designs' anthropic origins and our inherent animality. He often embraces transdisciplinary design-research to tell stories focused on bridging the engrained divides that exist between culture and nature by giving agency to the invisible or unnoticed relationships with which we are bound in modern life. 
       </p>
     </div>
   </main>
@@ -35,7 +48,6 @@
     </div>
   </div>
 
-  <script src="header.js"></script>
   <script src="theme.js"></script>
   <script src="ticker.js"></script>
 </body>

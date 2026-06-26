@@ -73,8 +73,8 @@
   --color-surface-2: #23211a;
   --color-surface-offset: #1c1a12;
   --color-surface-offset-2: #262318;
-  --color-divider: #2e2b1f;
-  --color-border: #3a3829;
+  --color-divider: #545141;
+  --color-border: #545141;
 
   --color-text: #eaf3e7;
   --color-text-muted: #A0A69D;
@@ -334,6 +334,7 @@ body {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   
+  
 }
 
 
@@ -354,7 +355,8 @@ body {
 }
 
 .info-about--active {
-  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+color: var(--color-primary-hover); 
+font-family: var(--font-decorative);
 }
 
 .info-about:hover{ 
@@ -543,7 +545,7 @@ color: var(--color-primary-hover);
   border-bottom: 1px solid var(--color-divider);
 }
 
-.channel-card-footer {}
+
 
 .channel-card-dates {
   display: flex;
@@ -557,7 +559,7 @@ color: var(--color-primary-hover);
   flex: 1;
   display: flex;
   align-items: center;
-  padding: 0 var(--space-2);
+  
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -565,7 +567,7 @@ color: var(--color-primary-hover);
 
 .channel-card-dates span + span {
   border-left: 1px solid var(--color-divider);
-  margin-left: var(--space-2);
+  padding-left: var(--space-2);
 }
 
 /* ---- Channel page ---- */
@@ -604,7 +606,11 @@ color: var(--color-primary-hover);
   transition: color var(--transition-interactive);
 }
 
-.back-link:hover { color: var(--color-primary-hover); }
+.back-link:hover { 
+color: var(--color-primary-hover); 
+font-family: var(--font-decorative);
+font-size: var(--text-sm);
+}
 
 .channel-title {
   font-family: var(--font-body);
