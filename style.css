@@ -370,8 +370,11 @@ button {
 
 /* ---- Filter bar ---- */
 .filters-bar {
-  padding: var(--space-5) var(--space-4);
+
   border-bottom: 1px solid var(--color-divider);
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
 }
 
 .filter-btns {
@@ -931,8 +934,9 @@ button {
 /* ---- About page ---- */
 .about-prose {
   max-width: 640px;
-  margin: 0 auto;
-  padding: var(--space-12) var(--space-6) var(--space-16);
+  margin: 0;
+  justify-content: left;
+  padding: var(--space-4) var(--space-4) var(--space-4);
 }
 
 .about-section {
@@ -940,16 +944,16 @@ button {
 }
 
 .about-heading {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 400;
+  font-family: var(--font-decorative);
+  font-size: var(--text-base);
+  font-weight: 500;
   letter-spacing: 0.04em;
-  color: var(--color-text-muted);
+  color: var(--color-primary-hover);
   margin-bottom: var(--space-4);
 }
 
 .about-prose p {
-  font-size: var(--text-base);
+  font-size: var(--text-xs);
   line-height: 1.7;
   color: var(--color-text);
   margin-bottom: var(--space-4);
