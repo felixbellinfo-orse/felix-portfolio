@@ -15,12 +15,57 @@
 
   <header class="site-header"></header>
 
-  <main class="about-main">
-    <div class="about-content">
-      <p class="about-bio">
-        Write something about yourself here.
+  <!-- Title bar — same as channel pages, back button only -->
+  <div class="channel-title-bar">
+    <a href="index.html" class="back-link" id="back-link">← back</a>
+  </div>
+
+  <main class="about-prose">
+
+    <!-- ============================================================
+         EDIT YOUR ABOUT PAGE CONTENT BELOW
+         Each <section class="about-section"> is a block of text.
+         Add a <h2> for a heading, <p> for paragraphs.
+         Add a <hr class="about-divider"> between sections.
+         ============================================================ -->
+
+    <section class="about-section">
+      <h2 class="about-heading">Felix Bell</h2>
+      <p>
+        Speaker designer and artist based in Rotterdam, the Netherlands.
+        Grew up in England and moved here to study a masters degree in
+        Geo Design at Design Academy Eindhoven.
       </p>
-    </div>
+      <p>
+        I have a shared woodwork and artist studio in Feijenoord on
+        Piekstraat, 3071 EL Rotterdam.
+      </p>
+    </section>
+
+    <hr class="about-divider">
+
+    <section class="about-section">
+      <h2 class="about-heading">Work</h2>
+      <p>
+        Write about your work here. What do you make, why do you make it,
+        what materials or processes do you use.
+      </p>
+    </section>
+
+    <hr class="about-divider">
+
+    <section class="about-section">
+      <h2 class="about-heading">Contact</h2>
+      <p>
+        <a href="mailto:felixbell.info@gmail.com">felixbell.info@gmail.com</a>
+      </p>
+      <p>+31 6 8785 1523</p>
+    </section>
+
+    <!-- ============================================================
+         END OF EDITABLE CONTENT
+         ============================================================ -->
+
   </main>
 
   <!-- Ticker bar -->
@@ -35,6 +80,16 @@
     </div>
   </div>
 
+  <script>
+    // Back button: go to previous page if available, else home
+    const backLink = document.getElementById('back-link');
+    if (backLink && history.length > 1) {
+      backLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        history.back();
+      });
+    }
+  </script>
   <script src="header.js"></script>
   <script src="theme.js"></script>
   <script src="ticker.js"></script>
