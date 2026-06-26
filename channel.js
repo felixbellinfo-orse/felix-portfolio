@@ -149,7 +149,6 @@ function renderLinkBlock(block) {
         }
         <div class="block-link-info">
           <span class="block-link-title">${escapeHtml(title)}</span>
-          <span class="block-link-url">${escapeHtml(hostname)}</span>
         </div>
       </a>
     </div>
