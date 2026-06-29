@@ -318,7 +318,6 @@ button {
 }
 
 .info-name:hover {
-  color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
 }
@@ -339,13 +338,11 @@ button {
 }
 
 .info-about--active {
-  color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
 }
 
 .info-about:hover {
-  color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
 }
@@ -474,6 +471,7 @@ button {
   border-bottom: 1px solid var(--color-divider);
 }
 
+
 .channel-card-title {
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -485,6 +483,12 @@ button {
   height: 2.2rem;
   border-bottom: 1px solid var(--color-divider);
   border-top: 1px solid var(--color-divider);
+}
+
+.channel-card:hover .channel-card-title {
+  font-family: var(--font-decorative);
+  font-size: var(--text-sm);
+
 }
 
 .channel-card-rolewith {
@@ -552,17 +556,14 @@ button {
 }
 
 .back-link {
-  font-size: var(--text-sm);
-  font-weight: 400;
-  color: var(--color-text-muted);
-  letter-spacing: 0.04em;
+  font-size: var(--text-xs);
   white-space: nowrap;
   transition: color var(--transition-interactive);
   margin-left: auto;
+  
 }
 
 .back-link:hover {
-  color: var(--color-primary-hover);
   font-family: var(--font-decorative);
 }
 
@@ -601,6 +602,7 @@ button {
   cursor: default;
   outline: 1px solid var(--color-divider);
 }
+
 
 .block-item.contain {
   outline: none;
@@ -749,8 +751,8 @@ button {
 
 .block-link-thumb img {
   aspect-ratio: 1 / 1;
-  width: 50%;
-  height: 50%;
+  width: 60%;
+  height: 60%;
   object-fit: contain;
   display: block;
   transition: opacity 0.2s;
@@ -762,26 +764,26 @@ button {
 }
 
 .block-link-info {
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-8) var(--space-8);
+  display: flex; 
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 2px;
+  line-height: 1.3;
+  
 }
 
 .block-link-title {
  
   font-size: var(--text-xs);
   color: var(--color-text);
-  line-height: 1.3;
   text-align: center;
-  padding: var(--space-2) var(--space-6) 0 var(--space-6);
+  align-items: center;
 }
 
 .block-link-card-inner:hover .block-link-title {
   color: var(--color-primary-hover);
-  font-family: var(--font-decorative);
-  font-weight: 500;
+
 }
 
 /* ---- Channel blocks ---- */
@@ -795,8 +797,9 @@ button {
   transition: background var(--transition-interactive);
 }
 
-.block-channel:hover {
-  color: var(--color-primary-hover);
+.block-channel:hover .block-channel-inner{
+ 
+  font-family: var(--font-decorative);
 }
 
 .block-channel-inner {
@@ -950,7 +953,6 @@ button {
   font-size: var(--text-base);
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: var(--color-primary-hover);
   margin-bottom: var(--space-4);
 }
 
