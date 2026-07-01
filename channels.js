@@ -27,7 +27,7 @@ const ARENA_CHANNELS = [
     },
 
     {
-  label: 'Educating gods: Design pedagogy, domes and the paradox of sealed utopias',
+  label: '↳ Educating gods',
   url: 'https://www.spectorbooks.com/book/on-behalf-of-the-environment-pedagogies-of-unrest',
   tags: ['writing'],
 },
