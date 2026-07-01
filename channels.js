@@ -6,14 +6,14 @@
 // tags = plain text labels of your choosing — these become the filter buttons.
 const ARENA_CHANNELS = [
   {
-    slug: 'soundsystem-yu-vopqlbgg',
-    label: 'soundsystem',
-    tags: ['sound', ],
+    slug: 'what-if-these-trees-could-speak',
+    label: 'what if these trees could speak',
+    tags: ['sound', 'ecology', 'workshop'],
   },
   {
-    slug: 'sound-rewire',
-    label: 'sound rewire',
-    tags: ['sound', 'installation'],
+    slug: 'on-behalf-of-the-environment-pedagogies-of-unrest',
+    label: 'on behalf of the environment',
+    tags: ['research', 'installation'],
   },
     {
     slug: 'two-sisters',
@@ -23,13 +23,13 @@ const ARENA_CHANNELS = [
       {
     slug: 'interior-biome',
     label: 'interior biome',
-    tags: ['sound'] ,
+    tags: ['sound', 'ecology'] ,
     },
 
     {
   label: '↳ educating gods',
   url: 'https://bauhaus-dessau.de/en/knowledge/publications/on-behalf-of-the-environment-pedagogies-of-unrest-bauhaus-bauhaus-taschenbuch-30/',
-  tags: ['writing'],
+  tags: ['writing', 'ecology'],
   role: 'Written contribution',
   with: 'Bauhaus Dessau',
   date: '2024',
@@ -39,7 +39,7 @@ const ARENA_CHANNELS = [
    {
   label: '↳ what spills?',
   url: 'https://cthulhubooks.com/products/we?variant=53388477694278',
-  tags: ['writing'],
+  tags: ['writing', 'ecology'],
   role: 'Written contribution',
   with: 'The Institute for Postnatural Studies',
   date: '2023',

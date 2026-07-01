@@ -721,6 +721,16 @@ button {
   font-weight: 350;
 }
 
+.block-text-content a {
+  text-decoration: underline;
+  color: var(--color-text);
+}
+
+.block-text-content a:hover {
+  color: var(--color-primary-hover);
+}
+
+
 .block-text-content p { margin-bottom: var(--space-4); }
 .block-text-content p:last-child { margin-bottom: 0; }
 
