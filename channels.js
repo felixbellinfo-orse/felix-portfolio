@@ -94,14 +94,16 @@ function parseChannelDesc(channel) {
   return { role: role ? role.trim() : '', with: with_ ? with_.trim() : '' };
 }
 
-function renderChannelCard(channel, slug, label, tags, externalUrl) {
-  const thumb = getChannelThumb(channel);
+function renderChannelCard(channel, slug, label, tags, externalUrl, overrides = {}) {
+  const thumb = overrides.thumbnail || getChannelThumb(channel);
   const url = externalUrl ? externalUrl : `channel.html?slug=${encodeURIComponent(slug)}`;
   const targetAttr = externalUrl ? ' target="_blank" rel="noopener"' : '';
-  const created = formatDate(channel.created_at);
-  const updated = formatDate(channel.updated_at);
+  const created = overrides.date ? overrides.date : formatDate(channel.created_at);
+  const updated = overrides.date ? null : formatDate(channel.updated_at);
   const cats = (tags || []).join(' ');
-  const { role, with: withVal } = parseChannelDesc(channel);
+  const { role: arenaRole, with: arenaWith } = parseChannelDesc(channel);
+  const role    = overrides.role  !== undefined ? overrides.role  : arenaRole;
+  const withVal = overrides.with  !== undefined ? overrides.with  : arenaWith;
 
   const thumbHtml = thumb
     ? `<img src="${thumb}" alt="${label}" loading="lazy" />`
@@ -189,21 +191,16 @@ async function initChannels() {
     );
 
     const cards = results.map((result, i) => {
-      const { slug, label, tags, url: externalUrl } = ARENA_CHANNELS[i];
+      const { slug, label, tags, url: externalUrl, role, with: withVal, date, thumbnail } = ARENA_CHANNELS[i];
+      const overrides = { role, with: withVal, date, thumbnail };
       if (result.status === 'fulfilled' && result.value !== null) {
-        return renderChannelCard(result.value, slug, label, tags, externalUrl);
+        return renderChannelCard(result.value, slug, label, tags, externalUrl, overrides);
       } else {
-        const cats = (tags || []).join(' ');
-        const href = externalUrl ? externalUrl : `channel.html?slug=${encodeURIComponent(slug)}`;
-        const targetAttr = externalUrl ? ' target="_blank" rel="noopener"' : '';
-        return `
-          <a href="${href}"${targetAttr} class="channel-card" data-categories="${cats}">
-            <div class="channel-card-thumb"><span class="channel-card-thumb-placeholder">—</span></div>
-            <div class="channel-card-body">
-              <h2 class="channel-card-title">${label}</h2>
-            </div>
-          </a>
-        `;
+        // external link card or failed fetch — render from config directly
+        return renderChannelCard(
+          { created_at: null, updated_at: null, contents: [] },
+          slug, label, tags, externalUrl, overrides
+        );
       }
     });
 
