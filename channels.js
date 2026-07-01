@@ -20,6 +20,11 @@ const ARENA_CHANNELS = [
     label: 'two sisters',
     tags: ['sound', 'speakers'],
     },
+      {
+    slug: 'interior-biome',
+    label: 'interior biome',
+    tags: ['sound'] ,
+    },
   // Add more channels below:
   // { slug: 'your-channel-slug', label: 'channel name', tags: ['sound'] },
 ];
