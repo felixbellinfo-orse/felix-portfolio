@@ -155,6 +155,20 @@ function renderLinkBlock(block) {
   `;
 }
 
+function renderAudioBlock(block, sizeClass, containClass) {
+  const title = block.generated_title || block.title || 'Audio';
+  const url = block.attachment.url;
+  return `
+    <div class="block-item block-audio ${sizeClass}${containClass}">
+      <div class="block-audio-inner">
+        <span class="block-audio-title">${escapeHtml(title)}</span>
+        <audio controls preload="none">
+          <source src="${escapeAttr(url)}" type="${escapeAttr(block.attachment.content_type)}">
+        </audio>
+      </div>
+    </div>`;
+}
+
 function renderChannelBlock(block) {
   const title = block.title || 'Channel';
   const url = `channel.html?slug=${encodeURIComponent(block.slug)}`;
@@ -171,7 +185,15 @@ function renderBlock(block) {
     case 'Text':       return renderTextBlock(block);
     case 'Link':       return renderLinkBlock(block);
     case 'Media':      return renderLinkBlock(block);
-    case 'Attachment': return renderImageBlock(block);
+    case 'Attachment': {
+      if (block.attachment && block.attachment.content_type.startsWith('audio/')) {
+        const dir = parseDirectives(block);
+        const sizeClass = dir.layout || 'quarter';
+        const containClass = dir.contain ? ' contain' : '';
+        return renderAudioBlock(block, sizeClass, containClass);
+      }
+      return renderImageBlock(block);
+    }
     case 'Channel':    return renderChannelBlock(block);
     default:           return null;
   }

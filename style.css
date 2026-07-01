@@ -786,6 +786,35 @@ button {
 
 }
 
+/* ---- Audio blocks ---- */
+.block-audio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  padding: var(--space-4);
+  box-sizing: border-box;
+}
+
+.block-audio-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.block-audio-title {
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.block-audio audio {
+  width: 100%;
+}
+
 /* ---- Channel blocks ---- */
 .block-channel {
   display: flex;
