@@ -25,6 +25,12 @@ const ARENA_CHANNELS = [
     label: 'interior biome',
     tags: ['sound'] ,
     },
+
+    {
+  label: 'Educating gods: Design pedagogy, domes and the paradox of sealed utopias',
+  url: 'https://www.spectorbooks.com/book/on-behalf-of-the-environment-pedagogies-of-unrest',
+  tags: ['writing'],
+},
   // Add more channels below:
   // { slug: 'your-channel-slug', label: 'channel name', tags: ['sound'] },
 ];
