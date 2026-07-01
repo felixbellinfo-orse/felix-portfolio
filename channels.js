@@ -27,9 +27,23 @@ const ARENA_CHANNELS = [
     },
 
     {
-  label: '↳ Educating gods',
-  url: 'https://www.spectorbooks.com/book/on-behalf-of-the-environment-pedagogies-of-unrest',
+  label: '↳ educating gods',
+  url: 'https://bauhaus-dessau.de/en/knowledge/publications/on-behalf-of-the-environment-pedagogies-of-unrest-bauhaus-bauhaus-taschenbuch-30/',
   tags: ['writing'],
+  role: 'Written contribution',
+  with: 'Bauhaus Dessau',
+  date: '2024',
+  thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnL63KNhqZaJT6i2I2kS68o10WfUDUKZtMuHOGBE6OZmhOLi-ylh-sIus&s=10',
+},
+
+   {
+  label: '↳ what spills?',
+  url: 'https://cthulhubooks.com/products/we?variant=53388477694278',
+  tags: ['writing'],
+  role: 'Written contribution',
+  with: 'The Institute for Postnatural Studies',
+  date: '2023',
+  thumbnail: 'https://cthulhubooks.com/cdn/shop/files/image_0ce1da46-9d9d-4bd5-936e-7b49007a5f8f.jpg?v=1730764940',
 },
   // Add more channels below:
   // { slug: 'your-channel-slug', label: 'channel name', tags: ['sound'] },
