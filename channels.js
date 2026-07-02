@@ -10,6 +10,11 @@ const ARENA_CHANNELS = [
     label: 'what if these trees could speak',
     tags: ['sound', 'ecology', 'workshop'],
   },
+    {
+    slug: 'orse-audio',
+    label: 'orse audio',
+    tags: ['sound', 'speakers', 'events'],
+  },
   {
     slug: 'on-behalf-of-the-environment-pedagogies-of-unrest',
     label: 'on behalf of the environment',
@@ -18,7 +23,7 @@ const ARENA_CHANNELS = [
     {
     slug: 'two-sisters',
     label: 'two sisters',
-    tags: ['sound', 'speakers'],
+    tags: ['sound', 'speakers', 'events'],
     },
       {
     slug: 'interior-biome',

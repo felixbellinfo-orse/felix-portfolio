@@ -474,7 +474,7 @@ button {
 
 .channel-card-title {
   font-family: var(--font-body);
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-weight: 300;
   color: var(--color-text);
   line-height: 1.2;
@@ -487,7 +487,7 @@ button {
 
 .channel-card:hover .channel-card-title {
   font-family: var(--font-decorative);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
 
 }
 
