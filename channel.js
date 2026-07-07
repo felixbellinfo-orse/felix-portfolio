@@ -174,12 +174,12 @@ function renderPdfBlock(block, sizeClass, containClass) {
 }
 
 function renderVideoBlock(block, sizeClass, containClass) {
-  const title = block.generated_title || block.title || 'Video';
   const url = block.attachment.url;
   const ct = block.attachment.content_type;
+  const poster = block.image && block.image.large ? block.image.large.url : '';
   return `
     <div class="block-item block-video ${sizeClass}${containClass}">
-      <video controls preload="none" playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+      <video controls preload="none" playsinline${poster ? ` poster="${escapeAttr(poster)}"` : ''} style="width:100%;height:100%;object-fit:cover;display:block;">
         <source src="${escapeAttr(url)}" type="${escapeAttr(ct)}">
       </video>
     </div>`;
