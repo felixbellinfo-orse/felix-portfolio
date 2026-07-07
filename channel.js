@@ -173,6 +173,18 @@ function renderPdfBlock(block, sizeClass, containClass) {
     </div>`;
 }
 
+function renderVideoBlock(block, sizeClass, containClass) {
+  const title = block.generated_title || block.title || 'Video';
+  const url = block.attachment.url;
+  const ct = block.attachment.content_type;
+  return `
+    <div class="block-item block-video ${sizeClass}${containClass}">
+      <video controls preload="none" playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+        <source src="${escapeAttr(url)}" type="${escapeAttr(ct)}">
+      </video>
+    </div>`;
+}
+
 function renderAudioBlock(block, sizeClass, containClass) {
   const title = block.generated_title || block.title || 'Audio';
   const url = block.attachment.url;
@@ -209,6 +221,7 @@ function renderBlock(block) {
       const containClass = dir.contain ? ' contain' : '';
       const ct = block.attachment ? block.attachment.content_type : '';
       if (ct.startsWith('audio/')) return renderAudioBlock(block, sizeClass, containClass);
+      if (ct.startsWith('video/')) return renderVideoBlock(block, sizeClass, containClass);
       if (ct === 'application/pdf') return renderPdfBlock(block, sizeClass, containClass);
       return renderImageBlock(block);
     }
