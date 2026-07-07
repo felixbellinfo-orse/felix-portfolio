@@ -16,6 +16,11 @@ const ARENA_CHANNELS = [
     label: 'what if these trees could speak',
     tags: ['sound', 'ecology', 'workshop'],
   },
+      {
+    slug: 'two-sisters',
+    label: 'two sisters',
+    tags: ['sound', 'speakers', 'events'],
+    },
     {
     slug: 'orse-audio',
     label: 'orse audio',
@@ -26,17 +31,17 @@ const ARENA_CHANNELS = [
     label: 'on behalf of the environment',
     tags: ['research', 'space'],
   },
-    {
-    slug: 'two-sisters',
-    label: 'two sisters',
-    tags: ['sound', 'speakers', 'events'],
-    },
+
       {
     slug: 'interior-biome',
     label: 'interior biome',
     tags: ['sound', 'ecology'] ,
     },
-
+   {
+    slug: 'sp-01',
+    label: 'green',
+    tags: ['sound', 'product', 'speakers'],
+  },
     {
   label: '↳ educating gods',
   url: 'https://bauhaus-dessau.de/en/knowledge/publications/on-behalf-of-the-environment-pedagogies-of-unrest-bauhaus-bauhaus-taschenbuch-30/',
