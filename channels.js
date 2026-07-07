@@ -38,7 +38,7 @@ const ARENA_CHANNELS = [
     tags: ['sound', 'ecology'] ,
     },
    {
-    slug: 'sp-01',
+    slug: 'green-4hbaps3u1h4',
     label: 'green',
     tags: ['sound', 'product', 'speakers'],
   },
