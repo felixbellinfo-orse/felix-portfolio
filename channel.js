@@ -159,31 +159,18 @@ function renderLinkBlock(block) {
 function renderPdfBlock(block, sizeClass, containClass) {
   const title = block.generated_title || block.title || 'Document';
   const pdfUrl = block.attachment.url;
-  const date = block.created_at ? block.created_at.slice(0, 10) : '';
-  const coverImg = block.image && block.image.large ? block.image.large.url : '';
+  const coverImg = block.image && block.image.thumb ? block.image.thumb.url : '';
+  const thumbHtml = coverImg
+    ? `<img src="${escapeAttr(coverImg)}" alt="${escapeAttr(title)}" loading="lazy" />`
+    : `<span class="block-pdf-ext">PDF</span>`;
 
-  if (coverImg) {
-    // Show cover image, lightbox opens with PDF link button
-    return `
-      <div class="block-item block-image block-pdf ${sizeClass}${containClass}"
-        data-lightbox
-        data-src="${escapeAttr(coverImg)}"
-        data-caption="${escapeAttr(title)}"
-        data-date="${escapeAttr(date)}"
-        data-pdf-url="${escapeAttr(pdfUrl)}"
-        tabindex="0" role="button" aria-label="View: ${escapeAttr(title)}">
-        <img src="${escapeAttr(coverImg)}" alt="${escapeAttr(title)}" loading="lazy" />
-      </div>`;
-  } else {
-    // No cover image — just a plain block linking directly to the PDF
-    return `
-      <div class="block-item block-pdf ${sizeClass}${containClass}">
-        <a href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener" class="block-pdf-link">
-          <span class="block-pdf-label">${escapeHtml(title)}</span>
-          <span class="block-pdf-ext">PDF</span>
-        </a>
-      </div>`;
-  }
+  return `
+    <div class="block-item block-pdf ${sizeClass}${containClass}">
+      <a href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener" class="block-pdf-link">
+        <div class="block-pdf-thumb">${thumbHtml}</div>
+        <span class="block-pdf-label">Read PDF</span>
+      </a>
+    </div>`;
 }
 
 function renderAudioBlock(block, sizeClass, containClass) {
