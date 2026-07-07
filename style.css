@@ -1150,6 +1150,32 @@ button {
   }
 }
 
+@media (max-width: 640px) {
+  /* Channel page — single column, ignore layout directives */
+  .blocks-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-flow: row !important;
+  }
+
+  .blocks-grid .block-item {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    aspect-ratio: auto !important;
+    min-height: 200px;
+    height: auto;
+  }
+
+  .blocks-grid .block-item.block-image {
+    min-height: 0;
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  .blocks-grid .block-item.full.block-image {
+    height: auto;
+    aspect-ratio: 4 / 3 !important;
+  }
+}
+
 @media (max-width: 420px) {
   .channels-grid { grid-template-columns: 1fr; }
 }
