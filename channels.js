@@ -5,6 +5,12 @@
 // Add channels here.
 // tags = plain text labels of your choosing — these become the filter buttons.
 const ARENA_CHANNELS = [
+    {
+    slug: 'whats-left-speaks',
+    label: 'whats left speaks',
+    tags: ['sound', 'space', 'speakers'],
+  },
+  
   {
     slug: 'what-if-these-trees-could-speak',
     label: 'what if these trees could speak',
@@ -18,7 +24,7 @@ const ARENA_CHANNELS = [
   {
     slug: 'on-behalf-of-the-environment-pedagogies-of-unrest',
     label: 'on behalf of the environment',
-    tags: ['research', 'installation'],
+    tags: ['research', 'space'],
   },
     {
     slug: 'two-sisters',
@@ -34,7 +40,7 @@ const ARENA_CHANNELS = [
     {
   label: '↳ educating gods',
   url: 'https://bauhaus-dessau.de/en/knowledge/publications/on-behalf-of-the-environment-pedagogies-of-unrest-bauhaus-bauhaus-taschenbuch-30/',
-  tags: ['writing', 'ecology'],
+  tags: ['writing', 'ecology', 'research'],
   role: 'Written contribution',
   with: 'Bauhaus Dessau',
   date: '2024',
@@ -50,6 +56,22 @@ const ARENA_CHANNELS = [
   date: '2023',
   thumbnail: 'https://cthulhubooks.com/cdn/shop/files/image_0ce1da46-9d9d-4bd5-936e-7b49007a5f8f.jpg?v=1730764940',
 },
+
+ {
+    slug: 'pressing-matter',
+    label: 'pressing matter',
+    tags: ['space', 'product'],
+  }, 
+
+     {
+  label: 'shimmering architecture',
+  slug: 'shimmering-architecture',
+  tags: ['writing', 'ecology', 'research'],
+  role: 'Written contribution',
+  with: 'Design Academy Eindhoven',
+  date: '2022',
+   }, 
+
   // Add more channels below:
   // { slug: 'your-channel-slug', label: 'channel name', tags: ['sound'] },
 ];
