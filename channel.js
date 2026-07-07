@@ -113,7 +113,8 @@ function renderImageBlock(block) {
 }
 
 function renderTextBlock(block) {
-  const html = block.content_html || (block.content ? `<p>${block.content}</p>` : '');
+  const raw = block.content_html || (block.content ? `<p>${block.content}</p>` : '');
+  const html = raw.replace(/<a /g, '<a target="_blank" rel="noopener" ');
   if (!html) return null;
   const title = block.title || '';
   const dir = parseDirectives(block);
@@ -155,6 +156,36 @@ function renderLinkBlock(block) {
   `;
 }
 
+function renderPdfBlock(block, sizeClass, containClass) {
+  const title = block.generated_title || block.title || 'Document';
+  const pdfUrl = block.attachment.url;
+  const date = block.created_at ? block.created_at.slice(0, 10) : '';
+  const coverImg = block.image && block.image.large ? block.image.large.url : '';
+
+  if (coverImg) {
+    // Show cover image, lightbox opens with PDF link button
+    return `
+      <div class="block-item block-image block-pdf ${sizeClass}${containClass}"
+        data-lightbox
+        data-src="${escapeAttr(coverImg)}"
+        data-caption="${escapeAttr(title)}"
+        data-date="${escapeAttr(date)}"
+        data-pdf-url="${escapeAttr(pdfUrl)}"
+        tabindex="0" role="button" aria-label="View: ${escapeAttr(title)}">
+        <img src="${escapeAttr(coverImg)}" alt="${escapeAttr(title)}" loading="lazy" />
+      </div>`;
+  } else {
+    // No cover image — just a plain block linking directly to the PDF
+    return `
+      <div class="block-item block-pdf ${sizeClass}${containClass}">
+        <a href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener" class="block-pdf-link">
+          <span class="block-pdf-label">${escapeHtml(title)}</span>
+          <span class="block-pdf-ext">PDF</span>
+        </a>
+      </div>`;
+  }
+}
+
 function renderAudioBlock(block, sizeClass, containClass) {
   const title = block.generated_title || block.title || 'Audio';
   const url = block.attachment.url;
@@ -186,12 +217,12 @@ function renderBlock(block) {
     case 'Link':       return renderLinkBlock(block);
     case 'Media':      return renderLinkBlock(block);
     case 'Attachment': {
-      if (block.attachment && block.attachment.content_type.startsWith('audio/')) {
-        const dir = parseDirectives(block);
-        const sizeClass = dir.layout || 'quarter';
-        const containClass = dir.contain ? ' contain' : '';
-        return renderAudioBlock(block, sizeClass, containClass);
-      }
+      const dir = parseDirectives(block);
+      const sizeClass = dir.layout || 'quarter';
+      const containClass = dir.contain ? ' contain' : '';
+      const ct = block.attachment ? block.attachment.content_type : '';
+      if (ct.startsWith('audio/')) return renderAudioBlock(block, sizeClass, containClass);
+      if (ct === 'application/pdf') return renderPdfBlock(block, sizeClass, containClass);
       return renderImageBlock(block);
     }
     case 'Channel':    return renderChannelBlock(block);
@@ -330,6 +361,7 @@ function buildLightboxItems() {
       src:     el.dataset.src     || '',
       caption: el.dataset.caption || '',
       date:    el.dataset.date    || '',
+      pdfUrl:  el.dataset.pdfUrl  || '',
     });
   });
 }
@@ -337,7 +369,7 @@ function buildLightboxItems() {
 function showLightboxAt(index) {
   if (index < 0 || index >= lightboxItems.length) return;
   lightboxIndex = index;
-  const { src, caption, date } = lightboxItems[index];
+  const { src, caption, date, pdfUrl } = lightboxItems[index];
 
   const lb      = document.getElementById('lightbox');
   const img     = document.getElementById('lightbox-img');
@@ -353,6 +385,25 @@ function showLightboxAt(index) {
   if (titleEl) titleEl.textContent = caption;
   if (dateEl)  dateEl.textContent  = date;
   if (meta)    meta.style.display  = (caption || date) ? 'flex' : 'none';
+
+  // PDF open button
+  let pdfBtn = document.getElementById('lightbox-pdf-btn');
+  if (pdfUrl) {
+    if (!pdfBtn) {
+      pdfBtn = document.createElement('a');
+      pdfBtn.id = 'lightbox-pdf-btn';
+      pdfBtn.className = 'lightbox-pdf-btn';
+      pdfBtn.textContent = 'Open PDF';
+      pdfBtn.target = '_blank';
+      pdfBtn.rel = 'noopener';
+      lb.appendChild(pdfBtn);
+    }
+    pdfBtn.href = pdfUrl;
+    pdfBtn.style.display = 'block';
+  } else if (pdfBtn) {
+    pdfBtn.style.display = 'none';
+  }
+
   lb.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 
