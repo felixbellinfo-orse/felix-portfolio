@@ -1093,9 +1093,48 @@ button {
   margin: var(--space-8) 0;
 }
 
+/* ---- Filter dropdown (mobile only) ---- */
+.filter-select {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: var(--text-xs);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  padding: 0 var(--space-4);
+  height: 100%;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 640px) {
-  .channels-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .channels-grid { grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+
+  /* Hide ticker on mobile */
+  .ticker-bar { display: none !important; }
+  body { padding-bottom: 0; }
+
+  /* Hide secondary header items */
+  .info-tagline,
+  .info-location,
+  .info-phone,
+  .info-email { display: none; }
+
+  /* Filter: hide buttons, show dropdown */
+  .filter-btns { display: none !important; }
+  .filter-select { display: block !important; }
+
+  /* Channel cards: image + title only */
+  .channel-card-rolewith,
+  .channel-card-dates,
+  .channel-card-footer { display: none; }
+
+  .channel-card-title {
+    border-top: none;
+  }
 }
 
 @media (max-width: 420px) {

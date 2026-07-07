@@ -183,19 +183,30 @@ function renderChannelCard(channel, slug, label, tags, externalUrl, overrides = 
 
 function buildFilters(tags) {
   const filtersEl = document.getElementById('channel-filters');
+  const selectEl  = document.getElementById('filter-select');
   if (!filtersEl) return;
 
-  filtersEl.innerHTML = ['all', ...tags].map(tag => `
+  const allTags = ['all', ...tags];
+
+  // Button bar (desktop)
+  filtersEl.innerHTML = allTags.map(tag => `
     <button
       class="filter-btn${tag === 'all' ? ' filter-btn--active' : ''}"
       data-filter="${tag}"
       aria-pressed="${tag === 'all' ? 'true' : 'false'}"
     >${tag}</button>
   `).join('');
-
   filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
   });
+
+  // Dropdown (mobile)
+  if (selectEl) {
+    selectEl.innerHTML = allTags.map(tag =>
+      `<option value="${tag}">${tag}</option>`
+    ).join('');
+    selectEl.addEventListener('change', () => applyFilter(selectEl.value));
+  }
 }
 
 function applyFilter(filter) {
@@ -226,6 +237,8 @@ async function initChannels() {
   if (allTags.length > 0) {
     buildFilters(allTags);
     document.getElementById('channel-filters').style.display = 'flex';
+    const sel = document.getElementById('filter-select');
+    if (sel) sel.style.display = 'block';
   }
 
   // Skeletons while fetching
