@@ -1111,17 +1111,30 @@ button {
 
 /* ---- Responsive ---- */
 @media (max-width: 640px) {
+
+  /* No horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   .channels-grid { grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 
   /* Hide ticker on mobile */
   .ticker-bar { display: none !important; }
   body { padding-bottom: 0; }
 
-  /* Hide secondary header items */
-  .info-tagline,
+  /* Header: only name, tagline, about, theme toggle */
+  .site-header {
+    gap: 0;
+  }
+
+  /* Hide location, phone, email from header — keep name, tagline, about, theme */
   .info-location,
   .info-phone,
-  .info-email { display: none; }
+  .info-email {
+    display: none;
+  }
 
   /* Filter: hide buttons, show dropdown */
   .filter-btns { display: none !important; }
