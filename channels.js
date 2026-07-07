@@ -237,8 +237,7 @@ async function initChannels() {
   if (allTags.length > 0) {
     buildFilters(allTags);
     document.getElementById('channel-filters').style.display = 'flex';
-    const sel = document.getElementById('filter-select');
-    if (sel) sel.style.display = 'block';
+    // dropdown visibility handled by CSS media query
   }
 
   // Skeletons while fetching

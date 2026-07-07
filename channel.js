@@ -260,16 +260,24 @@ async function loadMore() {
   }
 }
 
+async function fetchWithRetry(url, retries = 3, delay = 800) {
+  for (let i = 0; i < retries; i++) {
+    const res = await fetch(url);
+    if (res.ok) return res.json();
+    if (res.status === 429 && i < retries - 1) {
+      await new Promise(r => setTimeout(r, delay * (i + 1)));
+    } else {
+      throw new Error(`HTTP ${res.status}`);
+    }
+  }
+}
+
 async function fetchBlocks(slug, page) {
-  const res = await fetch(`${CHANNEL_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=position&direction=desc`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  return fetchWithRetry(`${CHANNEL_API}${slug}/contents?per=${PER_PAGE}&page=${page}&sort=position&direction=desc`);
 }
 
 async function fetchChannelInfo(slug) {
-  const res = await fetch(`${CHANNEL_API}${slug}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  return fetchWithRetry(`${CHANNEL_API}${slug}`);
 }
 
 async function initChannel() {
