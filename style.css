@@ -8,6 +8,14 @@
 }
 
 @font-face {
+  font-family: 'Bodoni Ornaments';
+  src: url('fonts/Bodoni Ornaments.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Salium';
   src: url('fonts/Salium.ttf') format('truetype');
   font-weight: 400;
@@ -276,6 +284,11 @@ button {
   align-items: center;
   height: 100%;
   position: relative;
+}
+
+.ticker-ornament {
+  font-family: 'Bodoni Ornaments', serif;
+  font-size: var(--text-sm);
 }
 
 .ticker-track {
