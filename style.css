@@ -1,7 +1,7 @@
 /* ---- Local fonts ---- */
 @font-face {
-  font-family: 'Bodoni 72 Oldstyle';
-  src: url('fonts/Bodoni 72.ttc') format('truetype');
+  font-family: 'Times New Roman';
+  src: url('fonts/Times New Roman.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -55,8 +55,8 @@
   --content-default: 1100px;
   --content-narrow: 700px;
 
-  --font-display: 'Bodoni 72 Oldstyle', serif;
-  --font-body: 'Bodoni 72 Oldstyle', serif;
+  --font-display: 'Times New Roman', serif;
+  --font-body: 'Times New Roman', serif;
   --font-decorative: 'Salium', serif;
   --font-decorative-weight: 500;
 
@@ -337,6 +337,7 @@ button {
 .info-name:hover {
   font-family: var(--font-decorative);
   font-weight: 500;
+  letter-spacing: 0.06rem;
 }
 
 .info-right {
@@ -362,6 +363,7 @@ button {
 .info-about:hover {
   font-family: var(--font-decorative);
   font-weight: 500;
+  letter-spacing: 0.06rem;
 }
 
 .theme-toggle {
@@ -417,13 +419,14 @@ button {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
-  
+  letter-spacing: 0.06rem;
 }
 
 .filter-btn--active {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
+  letter-spacing: 0.06rem;
   
 }
 
@@ -493,7 +496,7 @@ button {
 
 .channel-card-title {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 300;
   color: var(--color-text);
   line-height: 1.2;
@@ -506,6 +509,7 @@ button {
 
 .channel-card:hover .channel-card-title {
   font-family: var(--font-decorative);
+  letter-spacing: 0.04rem;
  
 
 }
@@ -521,18 +525,18 @@ button {
   align-items: center;
   height: 1.3rem;
   padding: 0;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--color-text-faint);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.025em;
   border-bottom: 1px solid var(--color-divider);
 }
 
 .channel-card-dates {
   display: flex;
   height: 1.3rem;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--color-text-faint);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.025em;
 }
 
 .channel-card-dates span {
@@ -584,6 +588,7 @@ button {
 
 .back-link:hover {
   font-family: var(--font-decorative);
+  letter-spacing: 0.06rem;
 }
 
 .channel-title {
@@ -747,6 +752,7 @@ button {
 
 .block-text-content a:hover {
   color: var(--color-primary-hover);
+  letter-spacing: 0.06rem;
 }
 
 
@@ -812,6 +818,7 @@ button {
 
 .block-link-card-inner:hover .block-link-title {
   color: var(--color-primary-hover);
+  letter-spacing: 0.06rem;
   
 }
 
@@ -859,6 +866,7 @@ button {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
+  letter-spacing: 0.06rem;
 }
 
 .lightbox-pdf-btn {
@@ -882,6 +890,7 @@ button {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
+  letter-spacing: 0.06rem;
 }
 
 /* ---- Audio blocks ---- */
@@ -927,7 +936,7 @@ button {
 .block-channel:hover .block-channel-inner{
  
   font-family: var(--font-decorative);
-  
+  letter-spacing: 0.06rem;
   
 }
 
