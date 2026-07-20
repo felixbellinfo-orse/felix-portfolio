@@ -417,14 +417,14 @@ button {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
-  font-size: 0.73rem;
+  
 }
 
 .filter-btn--active {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
   font-weight: 500;
-  font-size: 0.73rem;
+  
 }
 
 .channel-card--hidden {
@@ -506,7 +506,7 @@ button {
 
 .channel-card:hover .channel-card-title {
   font-family: var(--font-decorative);
-  font-size: 0.75rem
+ 
 
 }
 
@@ -927,7 +927,7 @@ button {
 .block-channel:hover .block-channel-inner{
  
   font-family: var(--font-decorative);
-  font-size: 0.75rem;
+  
   
 }
 
