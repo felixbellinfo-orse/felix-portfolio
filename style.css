@@ -1,7 +1,24 @@
+/* ---- Local fonts ---- */
+@font-face {
+  font-family: 'Bodoni 72 Oldstyle';
+  src: url('fonts/Bodoni72.ttc') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Salium';
+  src: url('fonts/Salium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================
    FELIX BELL — PORTFOLIO
    Palette: warm linen / raw wood / off-white paper
-   Font: Geist + Cormorant Unicase (decorative)
+   Font: Bodoni 72 Oldstyle (body) + Salium (decorative)
    ============================================================ */
 
 /* ---- Palette ---- */
@@ -38,9 +55,9 @@
   --content-default: 1100px;
   --content-narrow: 700px;
 
-  --font-display: 'Geist', sans-serif;
-  --font-body: 'Geist', sans-serif;
-  --font-decorative: 'Metamorphous', serif;
+  --font-display: 'Bodoni 72 Oldstyle', serif;
+  --font-body: 'Bodoni 72 Oldstyle', serif;
+  --font-decorative: 'Salium', serif;
   --font-decorative-weight: 500;
 
   /* Type scale */
