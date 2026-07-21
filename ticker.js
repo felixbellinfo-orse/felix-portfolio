@@ -14,11 +14,11 @@ const TICKER_CHANNELS = {
 };
 
 const ARENA_API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? '/arena/channels/' : 'https://api.are.na/v2/channels/';
-const SEPARATOR = '   <span class="ticker-ornament">-</span>   ';
+const SEPARATOR = '   <span class="ticker-ornament">t</span>   ';
 const PLACEHOLDER = ''; // no placeholder — both channels are live
 const SPEED = 60; // pixels per second — increase to scroll faster
 
-async function fetchTextBlocks(slug) {
+async function fetchTextBlocks(slug) {  
   try {
     const res = await fetch(`${ARENA_API}${slug}/contents?per=100&sort=position&direction=asc`);
     if (!res.ok) return [];

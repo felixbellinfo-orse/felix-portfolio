@@ -376,7 +376,7 @@ button {
 .info-about:hover {
   font-family: var(--font-decorative);
   font-weight: 500;
-  letter-spacing: 0.06rem;
+  letter-spacing: 0.08rem;
 }
 
 .theme-toggle {
@@ -431,15 +431,15 @@ button {
 .filter-btn:hover {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
-  font-weight: 500;
-  letter-spacing: 0.06rem;
+ 
+  letter-spacing: 0.08rem;
 }
 
 .filter-btn--active {
   color: var(--color-primary-hover);
   font-family: var(--font-decorative);
-  font-weight: 500;
-  letter-spacing: 0.06rem;
+ 
+  letter-spacing: 0.08rem;
   
 }
 

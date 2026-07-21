@@ -16,10 +16,10 @@ const HEADER_INFO = {
 
   el.innerHTML = `
     <a href="index.html" class="info-item info-name">${HEADER_INFO.name}</a>
-    <span class="info-item info-tagline">${HEADER_INFO.tagline}</span>
-    <span class="info-item info-location">${HEADER_INFO.location}</span>
-    <span class="info-item info-phone">${HEADER_INFO.phone}</span>
-    <a href="mailto:${HEADER_INFO.email}" class="info-item info-email">${HEADER_INFO.email}</a>
+    <span class="info-item">${HEADER_INFO.tagline}</span>
+    <span class="info-item">${HEADER_INFO.location}</span>
+    <a href="tel:${HEADER_INFO.phone.replace(/\s/g,'')}" class="info-item">${HEADER_INFO.phone}</a>
+    <a href="mailto:${HEADER_INFO.email}" class="info-item">${HEADER_INFO.email}</a>
     <div class="info-right">
       <a href="about.html" class="info-item info-about">About</a>
       <button data-theme-toggle aria-label="Switch theme" class="theme-toggle">
