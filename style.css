@@ -1175,6 +1175,16 @@ button {
     display: none;
   }
 
+  /* Ensure theme toggle stays visible on mobile */
+  .info-right {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle {
+    display: flex !important;
+  }
+
   /* Filter: hide buttons, show dropdown */
   .filter-btns { display: none !important; }
   .filter-select { display: block !important; }
