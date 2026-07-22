@@ -1164,16 +1164,41 @@ button {
   .ticker-bar { display: none !important; }
   body { padding-bottom: 0; }
 
-  /* Header: only name, tagline, about, theme toggle */
+  /* Header: name, tagline, about, theme toggle only */
   .site-header {
     gap: 0;
+    overflow: hidden;
   }
 
-  /* Hide location, phone, email from header — keep name, tagline, about, theme */
+  /* Hide location, phone, email */
   .info-location,
   .info-phone,
   .info-email {
     display: none;
+  }
+
+  /* Shrink name so right side has room */
+  .info-name {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  /* Tagline can shrink too */
+  .info-tagline {
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Keep right side (About + toggle) always visible */
+  .info-right {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle {
+    display: flex !important;
   }
 
   /* Filter: hide buttons, show dropdown */
