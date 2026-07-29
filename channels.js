@@ -39,7 +39,7 @@ const ARENA_CHANNELS = [
   role: 'radio',
   with: 'operator radio',
   date: '2025',
-  thumbnail: 'https://drive.google.com/file/d/1UK3ImjXf9C0raKrJCuT9B1RePBPwC6sD/view?usp=sharing',
+  thumbnail: 'https://d2w9rnfcy7mm78.cloudfront.net/48313160/original_b7699dd212aa36d509da5d09757d0842.png?1785313373?bc=0',
 },
 
       {
