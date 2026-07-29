@@ -32,6 +32,16 @@ const ARENA_CHANNELS = [
     tags: ['research', 'space'],
   },
 
+    {
+  label: '↳ OST radio show',
+  url: 'https://operator-radio.com/archive?artist=Just+Felix',
+  tags: ['sound'],
+  role: 'radio',
+  with: 'operator radio',
+  date: '2025',
+  thumbnail: 'https://drive.google.com/file/d/1UK3ImjXf9C0raKrJCuT9B1RePBPwC6sD/view?usp=sharing',
+},
+
       {
     slug: 'interior-biome',
     label: 'interior biome',
