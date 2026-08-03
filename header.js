@@ -7,7 +7,7 @@ const HEADER_INFO = {
   tagline:  'Sound & Space',
   location: 'Rotterdam',
   phone:    '+31 6 8785 1523',
-  email:    'felixbell.info@gmail.com',
+  email:    'hello@felixbell.com',
 };
 
 (function injectHeader() {

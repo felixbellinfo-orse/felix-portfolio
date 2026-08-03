@@ -36,7 +36,7 @@ const ARENA_CHANNELS = [
   label: '↳ OST radio show',
   url: 'https://operator-radio.com/archive?artist=Just+Felix',
   tags: ['sound'],
-  role: 'radio',
+  role: 'radio host',
   with: 'operator radio',
   date: '2025',
   thumbnail: 'https://d2w9rnfcy7mm78.cloudfront.net/48313160/original_b7699dd212aa36d509da5d09757d0842.png?1785313373?bc=0',
