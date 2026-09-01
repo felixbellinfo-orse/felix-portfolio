@@ -116,7 +116,9 @@ Each on its own line. These appear below the title on the index card.
 
 ## Adding channels
 
-Open `channels.js` and add entries to the `ARENA_CHANNELS` array:
+When you add a new channel you need to update **three files**:
+
+### 1. `channels.js` — add to the `ARENA_CHANNELS` array
 
 ```js
 const ARENA_CHANNELS = [
@@ -136,6 +138,29 @@ const ARENA_CHANNELS = [
 - **slug** — the last part of your Are.na channel URL (`are.na/felix-bell/my-channel` → `my-channel`)
 - **label** — what you want it called on the site
 - **tags** — filter button labels (any words you choose)
+
+### 2. `channel.js` — add the slug to `ALLOWED_SLUGS`
+
+Open `channel.js` and find the `ALLOWED_SLUGS` list near the top. Add your new slug:
+
+```js
+const ALLOWED_SLUGS = new Set([
+  'soundsystem-yu-vopqlbgg',
+  'your-new-channel-slug', // ← add this
+]);
+```
+
+This prevents Google from indexing pages for Are.na channels that aren't yours.
+
+### 3. `robots.txt` — allow the new slug
+
+Open `robots.txt` and add a line:
+
+```
+Allow: /channel.html?slug=your-new-channel-slug
+```
+
+This tells Google it's allowed to index that specific page.
 
 ---
 
