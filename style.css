@@ -583,7 +583,8 @@ button {
 }
 
 .channel-meta-role,
-.channel-meta-with {
+.channel-meta-with,
+.channel-meta-external {
   font-size: var(--text-xs);
   font-family: var(--font-body);
   font-weight: 400;
