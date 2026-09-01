@@ -19,6 +19,13 @@ const ALLOWED_SLUGS = new Set([
   'sound-rewire',
   'soundsystem-yu-vopqlbgg',
   'sp-01',
+  'sound-ecologies-vnbnac28wd8',
+  'speaker-inspo',
+  'lachie/neo-medieval',
+  'indoor-biome',
+  'queer-as-folk',
+  'nature-bodies',
+  'bauhaus-lab',
 ]);
 
 let currentSlug = '';

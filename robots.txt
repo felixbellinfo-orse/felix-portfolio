@@ -18,7 +18,6 @@ Allow: /channel.html?slug=sound-ecologies-vnbnac28wd8
 Allow: /channel.html?slug=speaker-inspo
 Allow: /channel.html?slug=lachie/neo-medieval
 Allow: /channel.html?slug=indoor-biome
-Allow: /channel.html?slug=sound-rewire
 Allow: /channel.html?slug=queer-as-folk
 Allow: /channel.html?slug=nature-bodies
 Allow: /channel.html?slug=bauhaus-lab
