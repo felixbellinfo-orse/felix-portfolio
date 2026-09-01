@@ -352,13 +352,23 @@ async function initChannel() {
 
     const titleBar = document.querySelector('.channel-title-bar');
     const backLink = document.getElementById('back-link');
-    if (titleBar && (role || withVal)) {
+    const isMyChannel = info.user && info.user.slug === 'felix-bell';
+
+    if (titleBar) {
       const meta = document.createElement('div');
       meta.className = 'channel-title-meta';
-      if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${role}</span>`;
-      if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${withVal}</span>`;
-      // Insert after title, before back link
-      titleBar.insertBefore(meta, backLink);
+
+      if (!isMyChannel && info.user) {
+        // External channel — show attribution
+        const name = info.user.full_name || info.user.username || info.user.slug;
+        meta.innerHTML = `<span class="channel-meta-external">Are.na channel by ${name}</span>`;
+        titleBar.insertBefore(meta, backLink);
+      } else if (role || withVal) {
+        // My channel — show role/with as before
+        if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${role}</span>`;
+        if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${withVal}</span>`;
+        titleBar.insertBefore(meta, backLink);
+      }
     }
     totalBlocks = info.length || 0;
 
