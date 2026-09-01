@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /about.html
+Allow: /channel.html?slug=whats-left-speaks
+Allow: /channel.html?slug=what-if-these-trees-could-speak
+Allow: /channel.html?slug=two-sisters
+Allow: /channel.html?slug=orse-audio
+Allow: /channel.html?slug=on-behalf-of-the-environment-pedagogies-of-unrest
+Allow: /channel.html?slug=interior-biome
+Allow: /channel.html?slug=green-4hbaps3u1h4
+Allow: /channel.html?slug=pressing-matter
+Allow: /channel.html?slug=shimmering-architecture
+Allow: /channel.html?slug=sound-rewire
+Allow: /channel.html?slug=soundsystem-yu-vopqlbgg
+Allow: /channel.html?slug=sp-01
+Disallow: /channel.html

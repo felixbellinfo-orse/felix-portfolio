@@ -5,6 +5,22 @@
 const CHANNEL_API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? '/arena/channels/' : 'https://api.are.na/v2/channels/';
 const PER_PAGE = 100;
 
+// Allowlist — only these slugs can be viewed on this site
+const ALLOWED_SLUGS = new Set([
+  'whats-left-speaks',
+  'what-if-these-trees-could-speak',
+  'two-sisters',
+  'orse-audio',
+  'on-behalf-of-the-environment-pedagogies-of-unrest',
+  'interior-biome',
+  'green-4hbaps3u1h4',
+  'pressing-matter',
+  'shimmering-architecture',
+  'sound-rewire',
+  'soundsystem-yu-vopqlbgg',
+  'sp-01',
+]);
+
 let currentSlug = '';
 let currentPage = 1;
 let totalBlocks = 0;
@@ -296,6 +312,7 @@ async function fetchChannelInfo(slug) {
 async function initChannel() {
   currentSlug = getSlugFromURL();
   if (!currentSlug) { window.location.href = 'index.html'; return; }
+  if (!ALLOWED_SLUGS.has(currentSlug)) { window.location.href = 'index.html'; return; }
   blockCounter = 0;
   textBlockCount = 0;
 
