@@ -358,15 +358,15 @@ async function initChannel() {
       const meta = document.createElement('div');
       meta.className = 'channel-title-meta';
 
-      if (!isMyChannel && info.user) {
-        // External channel — show attribution
-        const name = info.user.full_name || info.user.username || info.user.slug;
-        meta.innerHTML = `<span class="channel-meta-external">Are.na channel by ${name}</span>`;
-        titleBar.insertBefore(meta, backLink);
-      } else if (role || withVal) {
-        // My channel — show role/with as before
+      if (role || withVal) {
+        // Role/with explicitly set — show those
         if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${role}</span>`;
         if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${withVal}</span>`;
+        titleBar.insertBefore(meta, backLink);
+      } else if (info.user) {
+        // No role/with — fall back to attribution
+        const name = info.user.full_name || info.user.username || info.user.slug;
+        meta.innerHTML = `<span class="channel-meta-external">Are.na channel by ${name}</span>`;
         titleBar.insertBefore(meta, backLink);
       }
     }
