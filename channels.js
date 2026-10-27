@@ -5,7 +5,14 @@
 // Add channels here.
 // tags = plain text labels of your choosing — these become the filter buttons.
 const ARENA_CHANNELS = [
-    {
+      {
+    slug: 'bards-of-boisbuchet',
+    label: 'bards of boisbuchet',
+    tags: ['sound', 'speakers'],
+  },  
+  
+  
+  {
     slug: 'whats-left-speaks',
     label: 'whats left speaks',
     tags: ['sound', 'space', 'speakers'],
