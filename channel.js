@@ -26,6 +26,7 @@ const ALLOWED_SLUGS = new Set([
   'queer-as-folk',
   'nature-bodies',
   'bauhaus-lab',
+  'bards-of-boisbuchet'
 ]);
 
 let currentSlug = '';
@@ -352,23 +353,13 @@ async function initChannel() {
 
     const titleBar = document.querySelector('.channel-title-bar');
     const backLink = document.getElementById('back-link');
-    const isMyChannel = info.user && info.user.slug === 'felix-bell';
-
-    if (titleBar) {
+    if (titleBar && (role || withVal)) {
       const meta = document.createElement('div');
       meta.className = 'channel-title-meta';
-
-      if (role || withVal) {
-        // Role/with explicitly set — show those
-        if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${role}</span>`;
-        if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${withVal}</span>`;
-        titleBar.insertBefore(meta, backLink);
-      } else if (info.user) {
-        // No role/with — fall back to attribution
-        const name = info.user.full_name || info.user.username || info.user.slug;
-        meta.innerHTML = `<span class="channel-meta-external">Are.na channel by ${name}</span>`;
-        titleBar.insertBefore(meta, backLink);
-      }
+      if (role) meta.innerHTML += `<span class="channel-meta-role">Role: ${role}</span>`;
+      if (withVal) meta.innerHTML += `<span class="channel-meta-with">With: ${withVal}</span>`;
+      // Insert after title, before back link
+      titleBar.insertBefore(meta, backLink);
     }
     totalBlocks = info.length || 0;
 
