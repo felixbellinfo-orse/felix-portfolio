@@ -21,4 +21,5 @@ Allow: /channel.html?slug=indoor-biome
 Allow: /channel.html?slug=queer-as-folk
 Allow: /channel.html?slug=nature-bodies
 Allow: /channel.html?slug=bauhaus-lab
+Allow: /channel.html?slug=bards-of-boisbuchet
 Disallow: /channel.html
