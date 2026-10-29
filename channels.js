@@ -127,7 +127,7 @@ async function fetchWithRetry(url, retries = 3, delay = 800) {
 }
 
 async function fetchChannelPreview(slug) {
-  return fetchWithRetry(`${CHANNELS_API}${slug}?per=50`);
+  return fetchWithRetry(`${CHANNELS_API}${slug}?per=100`);
 }
 
 
